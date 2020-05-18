@@ -49,6 +49,10 @@ function Account(todayAsString = todayAsStringModuleFunction) {
   };
 
   this.withdraw = function withdraw(amount) {
+    if (isNotNumber(amount)) {
+      return 'Unable to make withdrawl - amount is not a number';
+    }
+
     if (amount <= 0) {
       return 'Unable to make withdrawl - amount must be positive';
     }

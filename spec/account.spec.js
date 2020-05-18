@@ -69,9 +69,13 @@ describe('Bank', () => {
       expect(account.withdraw(1000)).toEqual('Unable to make withdrawl - insufficient funds');
     });
 
-    it('refuses deposits with too many decimal places', () => {
+    it('refuses withdrawls with too many decimal places', () => {
       account.deposit(3000);
       expect(account.withdraw(1000.123)).toEqual('Unable to make withdrawl - amount has too many decimal places');
+    });
+
+    it('refuses withdrawls that arent numbers', () => {
+      expect(account.withdraw('')).toEqual('Unable to make withdrawl - amount is not a number');
     });
   });
 });
