@@ -58,5 +58,9 @@ describe('Bank', () => {
     it('allows you to withdraw 1000 pounds', () => {
       expect(bank.withdraw(1000)).toEqual(`1000 successfully withdrawn on ${currentDateString()}`);
     });
+
+    it('allows you to withdraw 2000 pounds', () => {
+      expect(bank.withdraw(2000)).toEqual(`2000 successfully withdrawn on ${currentDateString()}`);
+    });
   });
 });

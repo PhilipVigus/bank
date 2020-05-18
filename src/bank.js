@@ -22,7 +22,6 @@ function Bank() {
   this.deposit = function deposit(amount) {
     balance += amount;
     accountActions.push(`${todayAsString()} || ${amount}.00 || || ${balance}.00`);
-
     return `${amount} successfully deposited on ${todayAsString()}`;
   };
 
