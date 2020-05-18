@@ -2,7 +2,7 @@ const todayAsStringModuleFunction = require('./todayAsString.js');
 const StatementPrinterFunction = require('./statementPrinter.js');
 
 function Account(todayAsString = todayAsStringModuleFunction) {
-  const accountActions = [];
+  const history = [];
   let balance = 0;
 
   function hasInvalidDecimals(amount) {
@@ -26,7 +26,7 @@ function Account(todayAsString = todayAsStringModuleFunction) {
     }
 
     balance += amount;
-    accountActions.unshift({ type: 'deposit', amount, balance });
+    history.unshift({ type: 'deposit', amount, balance });
     return `${amount} successfully deposited on ${todayAsString()}`;
   };
 
@@ -44,12 +44,12 @@ function Account(todayAsString = todayAsStringModuleFunction) {
     }
 
     balance -= amount;
-    accountActions.unshift({ type: 'withdraw', amount, balance });
+    history.unshift({ type: 'withdraw', amount, balance });
     return `${amount} successfully withdrawn on ${todayAsString()}`;
   };
 
   this.printStatement = function printStatement(Printer = StatementPrinterFunction) {
-    const statementPrinter = new Printer(accountActions);
+    const statementPrinter = new Printer(history);
     return statementPrinter.printStatement();
   };
 }
