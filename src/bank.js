@@ -38,6 +38,10 @@ function Bank() {
   };
 
   this.withdraw = function withdraw(amount) {
+    if (amount <= 0) {
+      return 'Unable to make withdrawl - amount must be positive';
+    }
+
     balance -= amount;
     accountActions.push({ type: 'withdraw', amount, balance });
     return `${amount} successfully withdrawn on ${todayAsString()}`;
