@@ -68,6 +68,10 @@ describe('Bank', () => {
     it('allows you to deposit 2000 pounds', () => {
       expect(bank.deposit(2000)).toEqual(`2000 successfully deposited on ${currentDateString()}`);
     });
+
+    it('refuses deposits unless they are positive', () => {
+      expect(bank.deposit(0)).toEqual('Unable to make deposit - amount must be positive');
+    });
   });
 
   describe('.withdraw', () => {

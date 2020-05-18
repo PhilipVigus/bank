@@ -28,6 +28,10 @@ function Bank() {
   };
 
   this.deposit = function deposit(amount) {
+    if (amount <= 0) {
+      return 'Unable to make deposit - amount must be positive';
+    }
+
     balance += amount;
     accountActions.push({ type: 'deposit', amount, balance });
     return `${amount} successfully deposited on ${todayAsString()}`;
