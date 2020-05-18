@@ -22,8 +22,7 @@ function Account() {
       return STATEMENT_HEADER;
     }
 
-    const statement = accountActionsToStatementString();
-    return `${STATEMENT_HEADER}\n${statement}`;
+    return `${STATEMENT_HEADER}\n${accountActionsToStatementString()}`;
   };
 
   this.deposit = function deposit(amount) {
