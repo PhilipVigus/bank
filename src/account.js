@@ -67,6 +67,10 @@ function Account(todayAsString = todayAsStringModuleFunction) {
       return 'Unable to make withdrawl - insufficient funds';
     }
 
+    if (hasInvalidDecimals(amount)) {
+      return 'Unable to make withdrawl - amount has too many decimal places';
+    }
+
     balance -= amount;
     accountActions.unshift({ type: 'withdraw', amount, balance });
     return `${amount} successfully withdrawn on ${todayAsString()}`;
