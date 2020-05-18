@@ -33,9 +33,24 @@ function Account(todayAsString = todayAsStringModuleFunction) {
     return `${STATEMENT_HEADER}\n${accountActionsToStatementString()}`;
   };
 
+  function hasInvalidDecimals(amount) {
+    let numberOfDecimals = 0;
+
+    if (Math.floor(amount) !== amount) {
+      const decimalPart = amount.toString().split('.')[1];
+      numberOfDecimals = decimalPart.length || 0;
+    }
+
+    return numberOfDecimals > 2;
+  }
+
   this.deposit = function deposit(amount) {
     if (amount <= 0) {
       return 'Unable to make deposit - amount must be positive';
+    }
+
+    if (hasInvalidDecimals(amount)) {
+      return 'Unable to make deposit - amount has too many decimal places';
     }
 
     balance += amount;
