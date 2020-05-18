@@ -35,10 +35,10 @@ describe('Bank', () => {
 
     it('shows multiple deposits', () => {
       const expectedOutput = 'date || credit || debit || balance\n'
-        + `${currentDateString()} || 2000.00 || || 2000.00\n`
-        + `${currentDateString()} || 2000.00 || || 4000.00`;
+        + `${currentDateString()} || 1000.00 || || 1000.00\n`
+        + `${currentDateString()} || 2000.00 || || 3000.00`;
 
-      bank.deposit(2000);
+      bank.deposit(1000);
       bank.deposit(2000);
       expect(bank.printStatement()).toEqual(expectedOutput);
     });
