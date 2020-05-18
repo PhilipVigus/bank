@@ -4,11 +4,12 @@ function Bank() {
   };
 
   this.deposit = function deposit(amount) {
-    if (amount === 1000) {
-      return '1000 successfully deposited on 18/05/2020';
-    } else {
-      return '2000 successfully deposited on 18/05/2020';
-    }
+    const today = new Date();
+    const day = String(today.getDate()).padStart(2, '0');
+    const month = String(today.getMonth() + 1).padStart(2, '0');
+    const year = today.getFullYear();
+
+    return `${amount} successfully deposited on ${day}/${month}/${year}`;
   };
 }
 
