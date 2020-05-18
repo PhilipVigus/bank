@@ -1,6 +1,15 @@
 function Bank() {
+  let accountActions = [];
+  let balance = 0;
+
   this.printStatement = function printStatement() {
-    return 'date || credit || debit || balance';
+    let statement = 'date || credit || debit || balance';
+
+    if (accountActions.length === 0) {
+      return statement;
+    }
+
+    return `${statement}\n${accountActions.join('\n')}`;
   };
 
   this.deposit = function deposit(amount) {
@@ -8,6 +17,9 @@ function Bank() {
     const day = String(today.getDate()).padStart(2, '0');
     const month = String(today.getMonth() + 1).padStart(2, '0');
     const year = today.getFullYear();
+
+    balance += amount;
+    accountActions.push(`${day}/${month}/${year} || ${amount}.00 || || ${balance}.00`);
 
     return `${amount} successfully deposited on ${day}/${month}/${year}`;
   };

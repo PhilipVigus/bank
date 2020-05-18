@@ -12,22 +12,27 @@ describe('Bank', () => {
   let bank;
   beforeEach(() => {
     bank = new Bank();
+    jasmine.clock().install();
+    jasmine.clock.mockDate;
   });
 
-  it('prints a blank statement', () => {
-    expect(bank.printStatement()).toEqual('date || credit || debit || balance');
+  afterEach(() => {
+    jasmine.clock().uninstall();
+  });
+
+  describe('.printStatement', () => {
+    it('prints a blank statement', () => {
+      expect(bank.printStatement()).toEqual('date || credit || debit || balance');
+    });
+
+    it('shows a deposit', () => {
+      const expectedOutput = `date || credit || debit || balance\n${currentDateString()} || 2000.00 || || 2000.00`;
+      bank.deposit(2000);
+      expect(bank.printStatement()).toEqual(expectedOutput);
+    });
   });
 
   describe('.deposit', () => {
-    beforeEach(() => {
-      jasmine.clock().install();
-      jasmine.clock.mockDate;
-    });
-
-    afterEach(() => {
-      jasmine.clock().uninstall();
-    });
-
     it('allows you to deposit 1000 pounds', () => {
       expect(bank.deposit(1000)).toEqual(`1000 successfully deposited on ${currentDateString()}`);
     });
