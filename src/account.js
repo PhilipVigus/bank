@@ -1,37 +1,9 @@
 const todayAsStringModuleFunction = require('./todayAsString.js');
+const StatementPrinterFunction = require('./statementPrinter.js');
 
 function Account(todayAsString = todayAsStringModuleFunction) {
   const accountActions = [];
   let balance = 0;
-  const STATEMENT_HEADER = 'date || credit || debit || balance';
-
-  function depositStatementLine(amount, lineBalance) {
-    return `${todayAsString()} || ${amount.toFixed(2)} || || ${lineBalance.toFixed(2)}`;
-  }
-
-  function withdrawlStatementLine(amount, lineBalance) {
-    return `${todayAsString()} || || ${amount.toFixed(2)} || ${lineBalance.toFixed(2)}`;
-  }
-
-  function accountActionsToStatementString() {
-    const statement = accountActions.map((action) => {
-      if (action.type === 'deposit') {
-        return depositStatementLine(action.amount, action.balance);
-      } else {
-        return withdrawlStatementLine(action.amount, action.balance);
-      }
-    }).join('\n');
-
-    return statement;
-  }
-
-  this.printStatement = function printStatement() {
-    if (accountActions.length === 0) {
-      return STATEMENT_HEADER;
-    }
-
-    return `${STATEMENT_HEADER}\n${accountActionsToStatementString()}`;
-  };
 
   function hasInvalidDecimals(amount) {
     let numberOfDecimals = 0;
@@ -74,6 +46,11 @@ function Account(todayAsString = todayAsStringModuleFunction) {
     balance -= amount;
     accountActions.unshift({ type: 'withdraw', amount, balance });
     return `${amount} successfully withdrawn on ${todayAsString()}`;
+  };
+
+  this.printStatement = function printStatement(Printer = StatementPrinterFunction) {
+    const statementPrinter = new Printer(accountActions);
+    return statementPrinter.printStatement();
   };
 }
 

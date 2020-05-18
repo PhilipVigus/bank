@@ -13,65 +13,17 @@ describe('Bank', () => {
   });
 
   describe('.printStatement', () => {
-    it('prints a blank statement', () => {
-      expect(account.printStatement()).toEqual('date || credit || debit || balance');
-    });
+    it('calls printStatement on the statement printer', () => {
+      const printerMockInstance = {
+        printStatement() {},
+      };
+      spyOn(printerMockInstance, 'printStatement');
+      const StatementPrinterMockFunction = function StatementPrinter() {
+        return printerMockInstance;
+      };
 
-    it('shows a deposit', () => {
-      const expectedOutput = 'date || credit || debit || balance\n'
-        + '01/11/2013 || 2000.00 || || 2000.00';
-
-      account.deposit(2000);
-      expect(account.printStatement()).toEqual(expectedOutput);
-    });
-
-    it('shows multiple deposits', () => {
-      const expectedOutput = 'date || credit || debit || balance\n'
-        + '01/11/2013 || 2000.00 || || 3000.00\n'
-        + '01/11/2013 || 1000.00 || || 1000.00';
-
-
-      account.deposit(1000);
-      account.deposit(2000);
-      expect(account.printStatement()).toEqual(expectedOutput);
-    });
-
-    it('shows a decimal deposit', () => {
-      const expectedOutput = 'date || credit || debit || balance\n'
-        + '01/11/2013 || 2000.32 || || 2000.32';
-
-      account.deposit(2000.32);
-      expect(account.printStatement()).toEqual(expectedOutput);
-    });
-
-    it('shows a withdrawl of 1000', () => {
-      const expectedOutput = 'date || credit || debit || balance\n'
-      + '01/11/2013 || || 1000.00 || 2000.00\n'
-      + '01/11/2013 || 3000.00 || || 3000.00';
-
-      account.deposit(3000);
-      account.withdraw(1000);
-      expect(account.printStatement()).toEqual(expectedOutput);
-    });
-
-    it('shows a withdrawl of 2000', () => {
-      const expectedOutput = 'date || credit || debit || balance\n'
-        + '01/11/2013 || || 2000.00 || 0.00\n'
-        + '01/11/2013 || 2000.00 || || 2000.00';
-
-      account.deposit(2000);
-      account.withdraw(2000);
-      expect(account.printStatement()).toEqual(expectedOutput);
-    });
-
-    it('shows a withdrawl of 1000.32', () => {
-      const expectedOutput = 'date || credit || debit || balance\n'
-        + '01/11/2013 || || 1000.50 || 999.50\n'
-        + '01/11/2013 || 2000.00 || || 2000.00';
-
-      account.deposit(2000);
-      account.withdraw(1000.50);
-      expect(account.printStatement()).toEqual(expectedOutput);
+      account.printStatement(StatementPrinterMockFunction);
+      expect(printerMockInstance.printStatement).toHaveBeenCalled();
     });
   });
 
