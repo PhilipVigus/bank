@@ -37,6 +37,14 @@ describe('Bank', () => {
       expect(bank.printStatement()).toEqual(expectedOutput);
     });
 
+    it('shows a decimal deposit', () => {
+      const expectedOutput = 'date || credit || debit || balance\n'
+        + `${todayAsString()} || 2000.32 || || 2000.32`;
+
+      bank.deposit(2000.32);
+      expect(bank.printStatement()).toEqual(expectedOutput);
+    });
+
     it('shows a withdrawl of 1000', () => {
       const expectedOutput = 'date || credit || debit || balance\n'
         + `${todayAsString()} || || 1000.00 || -1000.00`;
