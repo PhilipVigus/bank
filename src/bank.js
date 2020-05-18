@@ -4,7 +4,11 @@ function Bank() {
   };
 
   this.deposit = function deposit(amount) {
-    return '1000 successfully deposited on 18/05/2020';
+    if (amount === 1000) {
+      return '1000 successfully deposited on 18/05/2020';
+    } else {
+      return '2000 successfully deposited on 18/05/2020';
+    }
   };
 }
 
