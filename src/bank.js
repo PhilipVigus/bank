@@ -1,6 +1,7 @@
 function Bank() {
   let accountActions = [];
   let balance = 0;
+  const STATEMENT_HEADER = 'date || credit || debit || balance';
 
   function todayAsString() {
     const today = new Date();
@@ -11,13 +12,11 @@ function Bank() {
   }
 
   this.printStatement = function printStatement() {
-    let statement = 'date || credit || debit || balance';
-
     if (accountActions.length === 0) {
-      return statement;
+      return STATEMENT_HEADER;
     }
 
-    return `${statement}\n${accountActions.join('\n')}`;
+    return `${STATEMENT_HEADER}\n${accountActions.join('\n')}`;
   };
 
   this.deposit = function deposit(amount) {
