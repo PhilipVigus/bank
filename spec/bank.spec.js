@@ -42,6 +42,14 @@ describe('Bank', () => {
       bank.deposit(2000);
       expect(bank.printStatement()).toEqual(expectedOutput);
     });
+
+    it ('shows a withdrawl', () => {
+      const expectedOutput = 'date || credit || debit || balance\n'
+        + `${currentDateString()} || || 1000.00 || -1000.00`;
+
+      bank.withdraw(1000);
+      expect(bank.printStatement()).toEqual(expectedOutput);
+    });
   });
 
   describe('.deposit', () => {

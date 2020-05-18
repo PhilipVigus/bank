@@ -26,6 +26,8 @@ function Bank() {
   };
 
   this.withdraw = function withdraw(amount) {
+    balance -= amount;
+    accountActions.push(`${todayAsString()} || || 1000.00 || -1000.00`);
     return `${amount} successfully withdrawn on ${todayAsString()}`;
   };
 }
