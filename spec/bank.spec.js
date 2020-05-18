@@ -19,6 +19,15 @@ describe('Bank', () => {
   });
 
   describe('.deposit', () => {
+    beforeEach(() => {
+      jasmine.clock().install();
+      jasmine.clock.mockDate;
+    });
+
+    afterEach(() => {
+      jasmine.clock().uninstall();
+    });
+
     it('allows you to deposit 1000 pounds', () => {
       expect(bank.deposit(1000)).toEqual(`1000 successfully deposited on ${currentDateString()}`);
     });
