@@ -30,6 +30,13 @@ describe('Bank', () => {
       bank.deposit(2000);
       expect(bank.printStatement()).toEqual(expectedOutput);
     });
+
+    it('shows multiple deposits', () => {
+      const expectedOutput = `date || credit || debit || balance\n${currentDateString()} || 2000.00 || || 2000.00\n${currentDateString()} || 2000.00 || || 4000.00`;
+      bank.deposit(2000);
+      bank.deposit(2000);
+      expect(bank.printStatement()).toEqual(expectedOutput);
+    });
   });
 
   describe('.deposit', () => {
