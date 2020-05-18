@@ -26,13 +26,18 @@ describe('Bank', () => {
     });
 
     it('shows a deposit', () => {
-      const expectedOutput = `date || credit || debit || balance\n${currentDateString()} || 2000.00 || || 2000.00`;
+      const expectedOutput = 'date || credit || debit || balance\n'
+        + `${currentDateString()} || 2000.00 || || 2000.00`;
+
       bank.deposit(2000);
       expect(bank.printStatement()).toEqual(expectedOutput);
     });
 
     it('shows multiple deposits', () => {
-      const expectedOutput = `date || credit || debit || balance\n${currentDateString()} || 2000.00 || || 2000.00\n${currentDateString()} || 2000.00 || || 4000.00`;
+      const expectedOutput = 'date || credit || debit || balance\n'
+        + `${currentDateString()} || 2000.00 || || 2000.00\n`
+        + `${currentDateString()} || 2000.00 || || 4000.00`;
+
       bank.deposit(2000);
       bank.deposit(2000);
       expect(bank.printStatement()).toEqual(expectedOutput);
