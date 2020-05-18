@@ -43,6 +43,10 @@ describe('Bank', () => {
     it('refuses deposits with too many decimal places', () => {
       expect(account.deposit(1000.123)).toEqual('Unable to make deposit - amount has too many decimal places');
     });
+
+    it('refuses deposits that arent numbers', () => {
+      expect(account.deposit('I am not a number')).toEqual('Unable to make deposit - amount is not a number');
+    });
   });
 
   describe('.withdraw', () => {

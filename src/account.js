@@ -5,6 +5,20 @@ function Account(todayAsString = todayAsStringModuleFunction) {
   const history = [];
   let balance = 0;
 
+  function isNotNumber(amount) {
+    /**
+     * ^[-]?\d+(\.\d+)?$
+     *
+     * ^ - anchor to start
+     * [-]? - optional minus sign
+     * \d+ - one or more digits
+     * (\.\d+) - a decimal point followed by one or more digits
+     * ? - decimal part is optional
+     * $ - anchor to end
+     */
+    return amount.toString().match(/^[-]?\d+(\.\d+)?$/) === null;
+  }
+
   function hasInvalidDecimals(amount) {
     let numberOfDecimals = 0;
 
@@ -17,6 +31,10 @@ function Account(todayAsString = todayAsStringModuleFunction) {
   }
 
   this.deposit = function deposit(amount) {
+    if (isNotNumber(amount)) {
+      return 'Unable to make deposit - amount is not a number';
+    }
+
     if (amount <= 0) {
       return 'Unable to make deposit - amount must be positive';
     }
