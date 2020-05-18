@@ -43,11 +43,19 @@ describe('Bank', () => {
       expect(bank.printStatement()).toEqual(expectedOutput);
     });
 
-    it ('shows a withdrawl', () => {
+    it('shows a withdrawl of 1000', () => {
       const expectedOutput = 'date || credit || debit || balance\n'
         + `${currentDateString()} || || 1000.00 || -1000.00`;
 
       bank.withdraw(1000);
+      expect(bank.printStatement()).toEqual(expectedOutput);
+    });
+
+    it('shows a withdrawl of 2000', () => {
+      const expectedOutput = 'date || credit || debit || balance\n'
+        + `${currentDateString()} || || 2000.00 || -2000.00`;
+
+      bank.withdraw(2000);
       expect(bank.printStatement()).toEqual(expectedOutput);
     });
   });
