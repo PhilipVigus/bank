@@ -5,12 +5,20 @@ function Account(todayAsString = todayAsStringModuleFunction) {
   let balance = 0;
   const STATEMENT_HEADER = 'date || credit || debit || balance';
 
+  function depositStatementLine(amount, lineBalance) {
+    return `${todayAsString()} || ${amount.toFixed(2)} || || ${lineBalance.toFixed(2)}`;
+  }
+
+  function withdrawlStatementLine(amount, lineBalance) {
+    return `${todayAsString()} || || ${amount.toFixed(2)} || ${lineBalance.toFixed(2)}`;
+  }
+
   function accountActionsToStatementString() {
     const statement = accountActions.map((action) => {
       if (action.type === 'deposit') {
-        return `${todayAsString()} || ${action.amount.toFixed(2)} || || ${action.balance.toFixed(2)}`;
+        return depositStatementLine(action.amount, action.balance);
       } else {
-        return `${todayAsString()} || || ${action.amount.toFixed(2)} || ${action.balance.toFixed(2)}`;
+        return withdrawlStatementLine(action.amount, action.balance);
       }
     }).join('\n');
 
