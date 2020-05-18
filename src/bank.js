@@ -16,18 +16,26 @@ function Bank() {
       return STATEMENT_HEADER;
     }
 
-    return `${STATEMENT_HEADER}\n${accountActions.join('\n')}`;
+    const statement = accountActions.map((action) => {
+      if (action.type === 'deposit') {
+        return `${todayAsString()} || ${action.amount}.00 || || ${action.balance}.00`;
+      } else {
+        return `${todayAsString()} || || ${action.amount}.00 || ${action.balance}.00`;
+      }
+    }).join('\n');
+
+    return `${STATEMENT_HEADER}\n${statement}`;
   };
 
   this.deposit = function deposit(amount) {
     balance += amount;
-    accountActions.push(`${todayAsString()} || ${amount}.00 || || ${balance}.00`);
+    accountActions.push({ type: 'deposit', amount, balance });
     return `${amount} successfully deposited on ${todayAsString()}`;
   };
 
   this.withdraw = function withdraw(amount) {
     balance -= amount;
-    accountActions.push(`${todayAsString()} || || ${amount}.00 || ${balance}.00`);
+    accountActions.push({ type: 'withdraw', amount, balance });
     return `${amount} successfully withdrawn on ${todayAsString()}`;
   };
 }
