@@ -27,8 +27,9 @@ describe('Bank', () => {
 
     it('shows multiple deposits', () => {
       const expectedOutput = 'date || credit || debit || balance\n'
-        + '01/11/2013 || 1000.00 || || 1000.00\n'
-        + '01/11/2013 || 2000.00 || || 3000.00';
+        + '01/11/2013 || 2000.00 || || 3000.00\n'
+        + '01/11/2013 || 1000.00 || || 1000.00';
+
 
       account.deposit(1000);
       account.deposit(2000);
@@ -45,8 +46,8 @@ describe('Bank', () => {
 
     it('shows a withdrawl of 1000', () => {
       const expectedOutput = 'date || credit || debit || balance\n'
-      + '01/11/2013 || 3000.00 || || 3000.00\n'
-      + '01/11/2013 || || 1000.00 || 2000.00';
+      + '01/11/2013 || || 1000.00 || 2000.00\n'
+      + '01/11/2013 || 3000.00 || || 3000.00';
 
       account.deposit(3000);
       account.withdraw(1000);
@@ -55,8 +56,8 @@ describe('Bank', () => {
 
     it('shows a withdrawl of 2000', () => {
       const expectedOutput = 'date || credit || debit || balance\n'
-        + '01/11/2013 || 2000.00 || || 2000.00\n'
-        + '01/11/2013 || || 2000.00 || 0.00';
+        + '01/11/2013 || || 2000.00 || 0.00\n'
+        + '01/11/2013 || 2000.00 || || 2000.00';
 
       account.deposit(2000);
       account.withdraw(2000);
@@ -65,8 +66,8 @@ describe('Bank', () => {
 
     it('shows a withdrawl of 1000.32', () => {
       const expectedOutput = 'date || credit || debit || balance\n'
-        + '01/11/2013 || 2000.00 || || 2000.00\n'
-        + '01/11/2013 || || 1000.50 || 999.50';
+        + '01/11/2013 || || 1000.50 || 999.50\n'
+        + '01/11/2013 || 2000.00 || || 2000.00';
 
       account.deposit(2000);
       account.withdraw(1000.50);

@@ -31,7 +31,7 @@ function Account(todayAsString = todayAsStringModuleFunction) {
     }
 
     balance += amount;
-    accountActions.push({ type: 'deposit', amount, balance });
+    accountActions.unshift({ type: 'deposit', amount, balance });
     return `${amount} successfully deposited on ${todayAsString()}`;
   };
 
@@ -45,7 +45,7 @@ function Account(todayAsString = todayAsStringModuleFunction) {
     }
 
     balance -= amount;
-    accountActions.push({ type: 'withdraw', amount, balance });
+    accountActions.unshift({ type: 'withdraw', amount, balance });
     return `${amount} successfully withdrawn on ${todayAsString()}`;
   };
 }
