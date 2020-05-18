@@ -14,7 +14,7 @@ function Bank() {
       if (action.type === 'deposit') {
         return `${todayAsString()} || ${action.amount.toFixed(2)} || || ${action.balance.toFixed(2)}`;
       } else {
-        return `${todayAsString()} || || ${action.amount}.00 || ${action.balance}.00`;
+        return `${todayAsString()} || || ${action.amount.toFixed(2)} || ${action.balance.toFixed(2)}`;
       }
     }).join('\n');
 

@@ -60,6 +60,14 @@ describe('Bank', () => {
       bank.withdraw(2000);
       expect(bank.printStatement()).toEqual(expectedOutput);
     });
+
+    it('shows a withdrawl of 1000.32', () => {
+      const expectedOutput = 'date || credit || debit || balance\n'
+        + `${todayAsString()} || || 1000.32 || -1000.32`;
+
+      bank.withdraw(1000.32);
+      expect(bank.printStatement()).toEqual(expectedOutput);
+    });
   });
 
   describe('.deposit', () => {
