@@ -40,6 +40,10 @@ function Account(todayAsString = todayAsStringModuleFunction) {
       return 'Unable to make withdrawl - amount must be positive';
     }
 
+    if (amount > balance) {
+      return 'Unable to make withdrawl - insufficient funds';
+    }
+
     balance -= amount;
     accountActions.push({ type: 'withdraw', amount, balance });
     return `${amount} successfully withdrawn on ${todayAsString()}`;
