@@ -2,6 +2,14 @@ function Bank() {
   let accountActions = [];
   let balance = 0;
 
+  function todayAsString() {
+    const today = new Date();
+    const day = String(today.getDate()).padStart(2, '0');
+    const month = String(today.getMonth() + 1).padStart(2, '0');
+    const year = today.getFullYear();
+    return `${day}/${month}/${year}`;
+  }
+
   this.printStatement = function printStatement() {
     let statement = 'date || credit || debit || balance';
 
@@ -13,24 +21,14 @@ function Bank() {
   };
 
   this.deposit = function deposit(amount) {
-    const today = new Date();
-    const day = String(today.getDate()).padStart(2, '0');
-    const month = String(today.getMonth() + 1).padStart(2, '0');
-    const year = today.getFullYear();
-
     balance += amount;
-    accountActions.push(`${day}/${month}/${year} || ${amount}.00 || || ${balance}.00`);
+    accountActions.push(`${todayAsString()} || ${amount}.00 || || ${balance}.00`);
 
-    return `${amount} successfully deposited on ${day}/${month}/${year}`;
+    return `${amount} successfully deposited on ${todayAsString()}`;
   };
 
   this.withdraw = function withdraw(amount) {
-    const today = new Date();
-    const day = String(today.getDate()).padStart(2, '0');
-    const month = String(today.getMonth() + 1).padStart(2, '0');
-    const year = today.getFullYear();
-
-    return `${amount} successfully withdrawn on ${day}/${month}/${year}`;
+    return `${amount} successfully withdrawn on ${todayAsString()}`;
   };
 }
 
