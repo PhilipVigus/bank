@@ -1,15 +1,11 @@
 const todayAsString = require('./todayAsString.js');
 
-function Bank() {
-  let accountActions = [];
+function Account() {
+  const accountActions = [];
   let balance = 0;
   const STATEMENT_HEADER = 'date || credit || debit || balance';
 
-  this.printStatement = function printStatement() {
-    if (accountActions.length === 0) {
-      return STATEMENT_HEADER;
-    }
-
+  function accountActionsToStatementString() {
     const statement = accountActions.map((action) => {
       if (action.type === 'deposit') {
         return `${todayAsString()} || ${action.amount.toFixed(2)} || || ${action.balance.toFixed(2)}`;
@@ -18,6 +14,15 @@ function Bank() {
       }
     }).join('\n');
 
+    return statement;
+  }
+
+  this.printStatement = function printStatement() {
+    if (accountActions.length === 0) {
+      return STATEMENT_HEADER;
+    }
+
+    const statement = accountActionsToStatementString();
     return `${STATEMENT_HEADER}\n${statement}`;
   };
 
@@ -42,4 +47,4 @@ function Bank() {
   };
 }
 
-module.exports = Bank;
+module.exports = Account;
