@@ -42,5 +42,5 @@ I want to be able to withdraw money
 
 As a user
 So that I can save my money
-I want to be able to depost money
+I want to be able to deposit money
 ```
