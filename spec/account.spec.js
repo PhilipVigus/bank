@@ -1,13 +1,11 @@
 const Account = require('../src/account.js');
-const todayAsString = require('../src/todayAsString.js'); 
 
 describe('Bank', () => {
   let account;
+  function todayAsString() { return '01/11/2013'; }
 
   beforeEach(() => {
-    account = new Account();
-    jasmine.clock().install();
-    jasmine.clock.mockDate;
+    account = new Account(todayAsString);
   });
 
   afterEach(() => {
@@ -21,7 +19,7 @@ describe('Bank', () => {
 
     it('shows a deposit', () => {
       const expectedOutput = 'date || credit || debit || balance\n'
-        + `${todayAsString()} || 2000.00 || || 2000.00`;
+        + '01/11/2013 || 2000.00 || || 2000.00';
 
       account.deposit(2000);
       expect(account.printStatement()).toEqual(expectedOutput);
@@ -29,8 +27,8 @@ describe('Bank', () => {
 
     it('shows multiple deposits', () => {
       const expectedOutput = 'date || credit || debit || balance\n'
-        + `${todayAsString()} || 1000.00 || || 1000.00\n`
-        + `${todayAsString()} || 2000.00 || || 3000.00`;
+        + '01/11/2013 || 1000.00 || || 1000.00\n'
+        + '01/11/2013 || 2000.00 || || 3000.00';
 
       account.deposit(1000);
       account.deposit(2000);
@@ -39,7 +37,7 @@ describe('Bank', () => {
 
     it('shows a decimal deposit', () => {
       const expectedOutput = 'date || credit || debit || balance\n'
-        + `${todayAsString()} || 2000.32 || || 2000.32`;
+        + '01/11/2013 || 2000.32 || || 2000.32';
 
       account.deposit(2000.32);
       expect(account.printStatement()).toEqual(expectedOutput);
@@ -47,7 +45,7 @@ describe('Bank', () => {
 
     it('shows a withdrawl of 1000', () => {
       const expectedOutput = 'date || credit || debit || balance\n'
-        + `${todayAsString()} || || 1000.00 || -1000.00`;
+        + '01/11/2013 || || 1000.00 || -1000.00';
 
       account.withdraw(1000);
       expect(account.printStatement()).toEqual(expectedOutput);
@@ -55,7 +53,7 @@ describe('Bank', () => {
 
     it('shows a withdrawl of 2000', () => {
       const expectedOutput = 'date || credit || debit || balance\n'
-        + `${todayAsString()} || || 2000.00 || -2000.00`;
+        + '01/11/2013 || || 2000.00 || -2000.00';
 
       account.withdraw(2000);
       expect(account.printStatement()).toEqual(expectedOutput);
@@ -63,7 +61,7 @@ describe('Bank', () => {
 
     it('shows a withdrawl of 1000.32', () => {
       const expectedOutput = 'date || credit || debit || balance\n'
-        + `${todayAsString()} || || 1000.32 || -1000.32`;
+        + '01/11/2013 || || 1000.32 || -1000.32';
 
       account.withdraw(1000.32);
       expect(account.printStatement()).toEqual(expectedOutput);
@@ -72,11 +70,11 @@ describe('Bank', () => {
 
   describe('.deposit', () => {
     it('allows you to deposit 1000 pounds', () => {
-      expect(account.deposit(1000)).toEqual(`1000 successfully deposited on ${todayAsString()}`);
+      expect(account.deposit(1000)).toEqual('1000 successfully deposited on 01/11/2013');
     });
 
     it('allows you to deposit 2000 pounds', () => {
-      expect(account.deposit(2000)).toEqual(`2000 successfully deposited on ${todayAsString()}`);
+      expect(account.deposit(2000)).toEqual('2000 successfully deposited on 01/11/2013');
     });
 
     it('refuses deposits unless they are positive', () => {
@@ -86,11 +84,11 @@ describe('Bank', () => {
 
   describe('.withdraw', () => {
     it('allows you to withdraw 1000 pounds', () => {
-      expect(account.withdraw(1000)).toEqual(`1000 successfully withdrawn on ${todayAsString()}`);
+      expect(account.withdraw(1000)).toEqual('1000 successfully withdrawn on 01/11/2013');
     });
 
     it('allows you to withdraw 2000 pounds', () => {
-      expect(account.withdraw(2000)).toEqual(`2000 successfully withdrawn on ${todayAsString()}`);
+      expect(account.withdraw(2000)).toEqual('2000 successfully withdrawn on 01/11/2013');
     });
 
     it('refuses withdrawls unless they are positive', () => {

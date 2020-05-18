@@ -1,6 +1,6 @@
-const todayAsString = require('./todayAsString.js');
+const todayAsStringModuleFunction = require('./todayAsString.js');
 
-function Account() {
+function Account(todayAsString = todayAsStringModuleFunction) {
   const accountActions = [];
   let balance = 0;
   const STATEMENT_HEADER = 'date || credit || debit || balance';
