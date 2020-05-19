@@ -2,10 +2,9 @@ const Account = require('../src/account.js');
 
 describe('Bank', () => {
   let account;
-  function todayAsString() { return '01/11/2013'; }
 
   beforeEach(() => {
-    account = new Account(todayAsString);
+    account = new Account();
   });
 
   afterEach(() => {
@@ -29,11 +28,11 @@ describe('Bank', () => {
 
   describe('.deposit', () => {
     it('allows you to deposit 1000 pounds', () => {
-      expect(account.deposit(1000)).toEqual('1000 successfully deposited on 01/11/2013');
+      expect(account.deposit(1000)).toEqual('1000 successfully deposited');
     });
 
     it('allows you to deposit 2000 pounds', () => {
-      expect(account.deposit(2000)).toEqual('2000 successfully deposited on 01/11/2013');
+      expect(account.deposit(2000)).toEqual('2000 successfully deposited');
     });
 
     it('refuses deposits unless they are positive', () => {
@@ -52,12 +51,12 @@ describe('Bank', () => {
   describe('.withdraw', () => {
     it('allows you to withdraw 1000 pounds', () => {
       account.deposit(3000);
-      expect(account.withdraw(1000)).toEqual('1000 successfully withdrawn on 01/11/2013');
+      expect(account.withdraw(1000)).toEqual('1000 successfully withdrawn');
     });
 
     it('allows you to withdraw 2000 pounds', () => {
       account.deposit(3000);
-      expect(account.withdraw(2000)).toEqual('2000 successfully withdrawn on 01/11/2013');
+      expect(account.withdraw(2000)).toEqual('2000 successfully withdrawn');
     });
 
     it('refuses withdrawls unless they are positive', () => {

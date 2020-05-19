@@ -1,7 +1,6 @@
-const todayAsStringModuleFunction = require('./todayAsString.js');
 const StatementPrinterFunction = require('./statementPrinter.js');
 
-function Account(todayAsString = todayAsStringModuleFunction) {
+function Account() {
   const history = [];
   let balance = 0;
 
@@ -44,8 +43,14 @@ function Account(todayAsString = todayAsStringModuleFunction) {
     }
 
     balance += amount;
-    history.unshift({ type: 'deposit', amount, balance });
-    return `${amount} successfully deposited on ${todayAsString()}`;
+    history.unshift({
+      type: 'deposit',
+      date: new Date(),
+      amount,
+      balance,
+    });
+
+    return `${amount} successfully deposited`;
   };
 
   this.withdraw = function withdraw(amount) {
@@ -66,8 +71,15 @@ function Account(todayAsString = todayAsStringModuleFunction) {
     }
 
     balance -= amount;
-    history.unshift({ type: 'withdraw', amount, balance });
-    return `${amount} successfully withdrawn on ${todayAsString()}`;
+
+    history.unshift({
+      type: 'withdraw',
+      date: new Date(),
+      amount,
+      balance,
+    });
+
+    return `${amount} successfully withdrawn`;
   };
 
   this.printStatement = function printStatement(Printer = StatementPrinterFunction) {
