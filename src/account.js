@@ -31,6 +31,10 @@ function Account() {
   }
 
   function validateDeposit(amount) {
+    if (amount === undefined) {
+      throw new Error('Unable to make deposit - amount is not specified');
+    }
+
     if (isNotNumber(amount)) {
       throw new Error('Unable to make deposit - amount is not a number');
     }
