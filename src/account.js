@@ -30,17 +30,43 @@ function Account() {
     return numberOfDecimals > 2;
   }
 
-  this.deposit = function deposit(amount) {
+  function validateDeposit(amount) {
     if (isNotNumber(amount)) {
-      return 'Unable to make deposit - amount is not a number';
+      throw new Error('Unable to make deposit - amount is not a number');
     }
 
     if (amount <= 0) {
-      return 'Unable to make deposit - amount must be positive';
+      throw new Error('Unable to make deposit - amount must be positive');
     }
 
     if (hasTooManyDecimals(amount)) {
-      return 'Unable to make deposit - amount has too many decimal places';
+      throw new Error('Unable to make deposit - amount has too many decimal places');
+    }
+  }
+
+  function validateWithdrawl(amount) {
+    if (isNotNumber(amount)) {
+      throw new Error('Unable to make withdrawl - amount is not a number');
+    }
+
+    if (amount <= 0) {
+      throw new Error('Unable to make withdrawl - amount must be positive');
+    }
+
+    if (amount > balance) {
+      throw new Error('Unable to make withdrawl - insufficient funds');
+    }
+
+    if (hasTooManyDecimals(amount)) {
+      throw new Error('Unable to make withdrawl - amount has too many decimal places');
+    }
+  }
+
+  this.deposit = function deposit(amount) {
+    try {
+      validateDeposit(amount);
+    } catch (error) {
+      return error.message;
     }
 
     balance += amount;
@@ -55,20 +81,10 @@ function Account() {
   };
 
   this.withdraw = function withdraw(amount) {
-    if (isNotNumber(amount)) {
-      return 'Unable to make withdrawl - amount is not a number';
-    }
-
-    if (amount <= 0) {
-      return 'Unable to make withdrawl - amount must be positive';
-    }
-
-    if (amount > balance) {
-      return 'Unable to make withdrawl - insufficient funds';
-    }
-
-    if (hasTooManyDecimals(amount)) {
-      return 'Unable to make withdrawl - amount has too many decimal places';
+    try {
+      validateWithdrawl(amount);
+    } catch (error) {
+      return error.message;
     }
 
     balance -= amount;
