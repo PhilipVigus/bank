@@ -15,7 +15,7 @@ function Account(transactionTypes = {
     const deposit = new transactionTypes.Deposit(details);
     balance += amount;
     transactions.push(deposit);
-    return `${amount} successfully deposited`;
+    return `${amount.toFixed(2)} successfully deposited`;
   }
 
   function addWithdrawl(amount) {
@@ -24,7 +24,7 @@ function Account(transactionTypes = {
     const withdrawl = new transactionTypes.Withdrawl(details);
     balance -= amount;
     transactions.push(withdrawl);
-    return `${amount} successfully withdrawn`;
+    return `${amount.toFixed(2)} successfully withdrawn`;
   }
 
   this.deposit = function deposit(amount) {
