@@ -8,17 +8,17 @@ describe('Bank', () => {
   });
 
   describe('.printStatement', () => {
-    it('calls printStatement on the statement printer', () => {
-      const printerMockInstance = {
-        printStatement() {},
+    it('calls print on the statement', () => {
+      const statementMockInstance = {
+        print() {},
       };
-      spyOn(printerMockInstance, 'printStatement');
-      const StatementPrinterMockFunction = function StatementPrinter() {
-        return printerMockInstance;
+      spyOn(statementMockInstance, 'print');
+      const StatementMockFunction = function StatementMockFunction() {
+        return statementMockInstance;
       };
 
-      account.printStatement(StatementPrinterMockFunction);
-      expect(printerMockInstance.printStatement).toHaveBeenCalled();
+      account.printStatement(StatementMockFunction);
+      expect(statementMockInstance.print).toHaveBeenCalled();
     });
   });
 

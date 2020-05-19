@@ -85,7 +85,7 @@ function Account() {
 
   this.printStatement = function printStatement(Statement = StatementFunction) {
     const statement = new Statement(history);
-    return statement.printStatement();
+    return statement.print();
   };
 }
 
