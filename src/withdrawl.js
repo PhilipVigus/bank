@@ -1,4 +1,4 @@
-function Withdrawl(withdrawlAmount, balance) {
+function Withdrawl(withdrawlDate, withdrawlAmount, balanceBeforeWithdrawl) {
   function hasTooManyDecimals(number) {
     let numberOfDecimals = 0;
 
@@ -37,12 +37,16 @@ function Withdrawl(withdrawlAmount, balance) {
       throw new Error('Unable to make withdrawl - amount is invalid');
     }
 
-    if (withdrawlAmount > balance) {
+    if (withdrawlAmount > balanceBeforeWithdrawl) {
       throw new Error('Unable to make withdrawl - insufficient funds');
     }
   }
 
   validateWithdrawl();
+
+  this.date = withdrawlDate;
+  this.amount = withdrawlAmount;
+  this.balanceBeforeWithdrawl = balanceBeforeWithdrawl;
 }
 
 module.exports = Withdrawl;
