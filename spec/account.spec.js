@@ -1,11 +1,7 @@
 const Account = require('../src/account.js');
 
-describe('Bank', () => {
+describe('Account', () => {
   let account;
-
-  beforeEach(() => {
-    account = new Account();
-  });
 
   describe('.printStatement', () => {
     it('calls print on the statement', () => {
@@ -23,74 +19,40 @@ describe('Bank', () => {
   });
 
   describe('.deposit', () => {
-    it('allows you to deposit 1000 pounds', () => {
-      expect(account.deposit(1000)).toEqual('1000 successfully deposited');
-    });
+    it('creates a new deposit', () => {
+      const DepositMock = function DepositMock() {
+        DepositMock.numberCreated += 1;
+        return {};
+      };
+      DepositMock.numberCreated = 0;
 
-    it('allows you to deposit 2000 pounds', () => {
-      expect(account.deposit(2000)).toEqual('2000 successfully deposited');
-    });
+      const transactionTypes = {
+        Deposit: DepositMock,
+        Withdraw: {},
+      };
 
-    describe('errors', () => {
-      it('refuses deposits unless they are positive', () => {
-        expect(account.deposit(0)).toEqual('Unable to make deposit - amount is invalid');
-      });
-
-      it('refuses deposits with too many decimal places', () => {
-        expect(account.deposit(1000.123)).toEqual('Unable to make deposit - amount is invalid');
-      });
-
-      it('refuses deposits that arent numbers', () => {
-        expect(account.deposit('I am not a number')).toEqual('Unable to make deposit - amount is invalid');
-      });
-
-      it('refuses deposits that are numbers as strings', () => {
-        expect(account.deposit('100')).toEqual('Unable to make deposit - amount is invalid');
-      });
-
-      it('refuses deposits where no amount is specified', () => {
-        expect(account.deposit()).toEqual('Unable to make deposit - amount is invalid');
-      });
+      account = new Account(transactionTypes);
+      account.deposit(100);
+      expect(DepositMock.numberCreated).toEqual(1);
     });
   });
 
   describe('.withdraw', () => {
-    it('allows you to withdraw 1000 pounds', () => {
-      account.deposit(3000);
-      expect(account.withdraw(1000)).toEqual('1000 successfully withdrawn');
-    });
+    it('creates a withdrawl', () => {
+      const WithdrawlMock = function WithdrawlMock() {
+        WithdrawlMock.numberCreated += 1;
+        return {};
+      };
+      WithdrawlMock.numberCreated = 0;
 
-    it('allows you to withdraw 2000 pounds', () => {
-      account.deposit(3000);
-      expect(account.withdraw(2000)).toEqual('2000 successfully withdrawn');
-    });
+      const transactionTypes = {
+        Deposit: {},
+        Withdrawl: WithdrawlMock,
+      };
 
-    describe('errors', () => {
-      it('refuses withdrawls unless they are positive', () => {
-        account.deposit(3000);
-        expect(account.withdraw(0)).toEqual('Unable to make withdrawl - amount is invalid');
-      });
-
-      it('refuses withdrawls if you have insufficient funds', () => {
-        expect(account.withdraw(1000)).toEqual('Unable to make withdrawl - insufficient funds');
-      });
-
-      it('refuses withdrawls with too many decimal places', () => {
-        account.deposit(3000);
-        expect(account.withdraw(1000.123)).toEqual('Unable to make withdrawl - amount is invalid');
-      });
-
-      it('refuses withdrawls that arent numbers', () => {
-        expect(account.withdraw('')).toEqual('Unable to make withdrawl - amount is invalid');
-      });
-
-      it('refuses withdrawls that are numbers as strings', () => {
-        expect(account.withdraw('100')).toEqual('Unable to make withdrawl - amount is invalid');
-      });
-
-      it('refuses withdrawls where no amount is specified', () => {
-        expect(account.withdraw()).toEqual('Unable to make withdrawl - amount is invalid');
-      });
+      account = new Account(transactionTypes);
+      account.withdraw(100);
+      expect(WithdrawlMock.numberCreated).toEqual(1);
     });
   });
 });
