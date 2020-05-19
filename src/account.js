@@ -18,7 +18,7 @@ function Account() {
     return amount.toString().match(/^[-]?\d+(\.\d+)?$/) === null;
   }
 
-  function hasInvalidDecimals(amount) {
+  function hasTooManyDecimals(amount) {
     let numberOfDecimals = 0;
 
     if (Math.floor(amount) !== amount) {
@@ -38,7 +38,7 @@ function Account() {
       return 'Unable to make deposit - amount must be positive';
     }
 
-    if (hasInvalidDecimals(amount)) {
+    if (hasTooManyDecimals(amount)) {
       return 'Unable to make deposit - amount has too many decimal places';
     }
 
@@ -66,7 +66,7 @@ function Account() {
       return 'Unable to make withdrawl - insufficient funds';
     }
 
-    if (hasInvalidDecimals(amount)) {
+    if (hasTooManyDecimals(amount)) {
       return 'Unable to make withdrawl - amount has too many decimal places';
     }
 
