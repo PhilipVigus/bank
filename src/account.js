@@ -49,24 +49,17 @@ function Account() {
   }
 
   function validateWithdrawl(amount) {
-    if (amount === undefined) {
-      throw new Error('Unable to make withdrawl - amount is not specified');
-    }
+    const isValidAmount = amount === undefined
+      || isNotNumber(amount)
+      || hasTooManyDecimals(amount)
+      || amount === 0;
 
-    if (isNotNumber(amount)) {
-      throw new Error('Unable to make withdrawl - amount is not a number');
-    }
-
-    if (amount <= 0) {
-      throw new Error('Unable to make withdrawl - amount must be positive');
+    if (isValidAmount) {
+      throw new Error('Unable to make withdrawl - amount is invalid');
     }
 
     if (amount > balance) {
       throw new Error('Unable to make withdrawl - insufficient funds');
-    }
-
-    if (hasTooManyDecimals(amount)) {
-      throw new Error('Unable to make withdrawl - amount has too many decimal places');
     }
   }
 
@@ -78,13 +71,7 @@ function Account() {
     }
 
     balance += amount;
-    transactions.push({
-      type: 'deposit',
-      date: new Date(),
-      amount,
-      balance,
-    });
-
+    transactions.push({ type: 'deposit', date: new Date(), amount, balance });
     return `${amount} successfully deposited`;
   };
 
@@ -96,14 +83,7 @@ function Account() {
     }
 
     balance -= amount;
-
-    transactions.push({
-      type: 'withdraw',
-      date: new Date(),
-      amount,
-      balance,
-    });
-
+    transactions.push({ type: 'withdraw', date: new Date(), amount, balance });
     return `${amount} successfully withdrawn`;
   };
 

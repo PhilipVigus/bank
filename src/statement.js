@@ -17,14 +17,18 @@ function Statement(accountHistory = []) {
     return `${dateToString(date)} || || ${amount.toFixed(2)} || ${lineBalance.toFixed(2)}`;
   }
 
+  function getStatementLine(action) {
+    if (action.type === 'deposit') {
+      return depositStatementLine(action.date, action.amount, action.balance);
+    } else {
+      return withdrawlStatementLine(action.date, action.amount, action.balance);
+    }
+  }
+
   function accountActionsToStatementString() {
     const actionsInReverseOrder = history.reverse();
     const statementLines = actionsInReverseOrder.map((action) => {
-      if (action.type === 'deposit') {
-        return depositStatementLine(action.date, action.amount, action.balance);
-      } else {
-        return withdrawlStatementLine(action.date, action.amount, action.balance);
-      }
+      return getStatementLine(action);
     });
 
     return statementLines.join('\n');

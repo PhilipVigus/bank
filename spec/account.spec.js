@@ -68,7 +68,7 @@ describe('Bank', () => {
     describe('errors', () => {
       it('refuses withdrawls unless they are positive', () => {
         account.deposit(3000);
-        expect(account.withdraw(0)).toEqual('Unable to make withdrawl - amount must be positive');
+        expect(account.withdraw(0)).toEqual('Unable to make withdrawl - amount is invalid');
       });
 
       it('refuses withdrawls if you have insufficient funds', () => {
@@ -77,19 +77,19 @@ describe('Bank', () => {
 
       it('refuses withdrawls with too many decimal places', () => {
         account.deposit(3000);
-        expect(account.withdraw(1000.123)).toEqual('Unable to make withdrawl - amount has too many decimal places');
+        expect(account.withdraw(1000.123)).toEqual('Unable to make withdrawl - amount is invalid');
       });
 
       it('refuses withdrawls that arent numbers', () => {
-        expect(account.withdraw('')).toEqual('Unable to make withdrawl - amount is not a number');
+        expect(account.withdraw('')).toEqual('Unable to make withdrawl - amount is invalid');
       });
 
       it('refuses withdrawls that are numbers as strings', () => {
-        expect(account.withdraw('100')).toEqual('Unable to make withdrawl - amount is not a number');
+        expect(account.withdraw('100')).toEqual('Unable to make withdrawl - amount is invalid');
       });
 
       it('refuses withdrawls where no amount is specified', () => {
-        expect(account.withdraw()).toEqual('Unable to make withdrawl - amount is not specified');
+        expect(account.withdraw()).toEqual('Unable to make withdrawl - amount is invalid');
       });
     });
   });
