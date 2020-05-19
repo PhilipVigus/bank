@@ -1,4 +1,6 @@
 const StatementFunction = require('./statement.js');
+const Deposit = require('./deposit.js');
+const Withdrawl = require('./withdrawl.js');
 
 function Account() {
   const transactions = [];
@@ -55,26 +57,24 @@ function Account() {
 
   this.deposit = function deposit(amount) {
     try {
-      validateDeposit(amount);
+      const deposit = new Deposit(new Date(), amount, balance);
+      balance += amount;
+      transactions.push(deposit);
+      return `${amount} successfully deposited`;
     } catch (error) {
       return error.message;
     }
-
-    balance += amount;
-    transactions.push({ type: 'deposit', date: new Date(), amount, balance });
-    return `${amount} successfully deposited`;
   };
 
   this.withdraw = function withdraw(amount) {
     try {
-      validateWithdrawl(amount);
+      const withdrawl = new Withdrawl(new Date(), amount, balance);
+      balance -= amount;
+      transactions.push(withdrawl);
+      return `${amount} successfully withdrawn`;
     } catch (error) {
       return error.message;
     }
-
-    balance -= amount;
-    transactions.push({ type: 'withdraw', date: new Date(), amount, balance });
-    return `${amount} successfully withdrawn`;
   };
 
   this.printStatement = function printStatement(Statement = StatementFunction) {

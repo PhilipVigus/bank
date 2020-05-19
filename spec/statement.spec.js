@@ -33,7 +33,7 @@ describe('Statement', () => {
           + `${dateString} || 2000.00 || || 2000.00`;
 
         const statement = new Statement([{
-          type: 'deposit', amount: 2000, balance: 2000, date,
+          type: 'deposit', amount: 2000, balanceAfterDeposit: 2000, date,
         }]);
 
         expect(statement.print()).toEqual(expectedOutput);
@@ -45,8 +45,8 @@ describe('Statement', () => {
           + `${dateString} || 1000.00 || || 1000.00`;
 
         const transactions = [
-          { type: 'deposit', amount: 1000, balance: 1000, date },
-          { type: 'deposit', amount: 2000, balance: 3000, date },
+          { type: 'deposit', amount: 1000, balanceAfterDeposit: 1000, date },
+          { type: 'deposit', amount: 2000, balanceAfterDeposit: 3000, date },
         ];
 
         const statement = new Statement(transactions);
@@ -58,7 +58,7 @@ describe('Statement', () => {
           + `${dateString} || 2000.32 || || 2000.32`;
 
         const statement = new Statement([{
-          type: 'deposit', amount: 2000.32, balance: 2000.32, date,
+          type: 'deposit', amount: 2000.32, balanceAfterDeposit: 2000.32, date,
         }]);
 
         expect(statement.print()).toEqual(expectedOutput);
@@ -72,8 +72,8 @@ describe('Statement', () => {
         + `${dateString} || 3000.00 || || 3000.00`;
 
         const transactions = [
-          { type: 'deposit', amount: 3000, balance: 3000, date },
-          { type: 'withdraw', amount: 1000, balance: 2000, date },
+          { type: 'deposit', amount: 3000, balanceAfterDeposit: 3000, date },
+          { type: 'withdraw', amount: 1000, balanceAfterWithdrawl: 2000, date },
         ];
 
         const statement = new Statement(transactions);
@@ -86,8 +86,8 @@ describe('Statement', () => {
           + `${dateString} || 2000.00 || || 2000.00`;
 
         const transactions = [
-          { type: 'deposit', amount: 2000, balance: 2000, date },
-          { type: 'withdraw', amount: 2000, balance: 0, date },
+          { type: 'deposit', amount: 2000, balanceAfterDeposit: 2000, date },
+          { type: 'withdraw', amount: 2000, balanceAfterWithdrawl: 0, date },
         ];
 
         const statement = new Statement(transactions);
@@ -100,8 +100,8 @@ describe('Statement', () => {
           + `${dateString} || 2000.00 || || 2000.00`;
 
         const transactions = [
-          { type: 'deposit', amount: 2000, balance: 2000, date },
-          { type: 'withdraw', amount: 1000.50, balance: 999.50, date },
+          { type: 'deposit', amount: 2000, balanceAfterDeposit: 2000, date },
+          { type: 'withdraw', amount: 1000.50, balanceAfterWithdrawl: 999.50, date },
         ];
 
         const statement = new Statement(transactions);

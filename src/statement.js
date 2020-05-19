@@ -1,6 +1,6 @@
-function Statement(accountHistory = []) {
+function Statement(statementTransactions = []) {
   const STATEMENT_HEADER = 'date || credit || debit || balance';
-  const history = accountHistory;
+  const transactions = statementTransactions;
 
   function dateToString(date) {
     const day = String(date.getDate()).padStart(2, '0');
@@ -17,16 +17,16 @@ function Statement(accountHistory = []) {
     return `${dateToString(date)} || || ${amount.toFixed(2)} || ${lineBalance.toFixed(2)}`;
   }
 
-  function getStatementLine(action) {
-    if (action.type === 'deposit') {
-      return depositStatementLine(action.date, action.amount, action.balance);
+  function getStatementLine(transaction) {
+    if (transaction.type === 'deposit') {
+      return depositStatementLine(transaction.date, transaction.amount, transaction.balanceAfterDeposit);
     } else {
-      return withdrawlStatementLine(action.date, action.amount, action.balance);
+      return withdrawlStatementLine(transaction.date, transaction.amount, transaction.balanceAfterWithdrawl);
     }
   }
 
   function accountActionsToStatementString() {
-    const actionsInReverseOrder = history.reverse();
+    const actionsInReverseOrder = transactions.reverse();
     const statementLines = actionsInReverseOrder.map((action) => {
       return getStatementLine(action);
     });
@@ -35,7 +35,7 @@ function Statement(accountHistory = []) {
   }
 
   this.print = function print() {
-    if (history.length === 0) {
+    if (transactions.length === 0) {
       return STATEMENT_HEADER;
     }
 

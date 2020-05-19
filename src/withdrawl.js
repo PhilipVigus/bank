@@ -51,9 +51,10 @@ function Withdrawl(withdrawlDate, withdrawlAmount, balanceBeforeWithdrawl) {
 
   validateWithdrawl();
 
+  this.type = 'withdrawl';
   this.date = withdrawlDate;
   this.amount = withdrawlAmount;
-  this.balanceBeforeWithdrawl = balanceBeforeWithdrawl;
+  this.balanceAfterWithdrawl = balanceBeforeWithdrawl - withdrawlAmount;
 }
 
 module.exports = Withdrawl;

@@ -44,9 +44,10 @@ function Deposit(depositDate, depositAmount, balanceBeforeDeposit) {
 
   validateDeposit();
 
+  this.type = 'deposit';
   this.date = depositDate;
   this.amount = depositAmount;
-  this.balanceBeforeDeposit = balanceBeforeDeposit;
+  this.balanceAfterDeposit = balanceBeforeDeposit + depositAmount;
 }
 
 module.exports = Deposit;
