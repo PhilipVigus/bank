@@ -32,14 +32,21 @@ function Withdrawl(withdrawlDate, withdrawlAmount, balanceBeforeWithdrawl) {
       || (amount === 0);
   }
 
-  function validateWithdrawl() {
-    if (isAmountInvalid(withdrawlAmount)) {
-      throw new Error('Unable to make withdrawl - amount is invalid');
-    }
-
+  function validateAvailableFunds() {
     if (withdrawlAmount > balanceBeforeWithdrawl) {
       throw new Error('Unable to make withdrawl - insufficient funds');
     }
+  }
+
+  function validateAmount() {
+    if (isAmountInvalid(withdrawlAmount)) {
+      throw new Error('Unable to make withdrawl - amount is invalid');
+    }
+  }
+
+  function validateWithdrawl() {
+    validateAmount();
+    validateAvailableFunds();
   }
 
   validateWithdrawl();
