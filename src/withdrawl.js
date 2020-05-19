@@ -1,10 +1,14 @@
 function Withdrawl(withdrawlDate, withdrawlAmount, balanceBeforeWithdrawl) {
+  function getDecimals(number) {
+    const decimalPart = number.toString().split('.')[1];
+    return decimalPart.length;
+  }
+
   function hasTooManyDecimals(number) {
     let numberOfDecimals = 0;
 
     if (Math.floor(number) !== number) {
-      const decimalPart = number.toString().split('.')[1];
-      numberOfDecimals = decimalPart.length || 0;
+      numberOfDecimals = getDecimals(number);
     }
 
     return numberOfDecimals > 2;
