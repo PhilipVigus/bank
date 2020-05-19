@@ -1,6 +1,6 @@
-const isValidAmount = require('./isValidAmount.js');
+const isValidAmountFunction = require('./isValidAmount.js');
 
-function Withdrawl(withdrawlDate, withdrawlAmount, balanceBeforeWithdrawl) {
+function Withdrawl(withdrawlDate, withdrawlAmount, balanceBeforeWithdrawl, isValidAmount = isValidAmountFunction) {
   function validateAvailableFunds() {
     if (withdrawlAmount > balanceBeforeWithdrawl) {
       throw new Error('Unable to make withdrawl - insufficient funds');

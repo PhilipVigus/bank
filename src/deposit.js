@@ -1,6 +1,6 @@
-const isValidAmount = require('./isValidAmount.js');
+const isValidAmountFunction = require('./isValidAmount.js');
 
-function Deposit(depositDate, depositAmount, balanceBeforeDeposit) {
+function Deposit(depositDate, depositAmount, balanceBeforeDeposit, isValidAmount = isValidAmountFunction) {
   function validateAmount() {
     if (!isValidAmount(depositAmount)) {
       throw new Error('Unable to make deposit - amount is invalid');
