@@ -6,60 +6,23 @@ function Account() {
   const transactions = [];
   let balance = 0;
 
-  function isNotNumber(amount) {
-    /**
-     * ^[-]?\d+(\.\d+)?$
-     *
-     * ^ - anchor to start
-     * [-]? - optional minus sign
-     * \d+ - one or more digits
-     * (\.\d+) - a decimal point followed by one or more digits
-     * ? - decimal part is optional
-     * $ - anchor to end
-     */
-    return amount.toString().match(/^[-]?\d+(\.\d+)?$/) === null
-      || typeof amount !== 'number';
+  function addDeposit(amount) {
+    // throws if deposit is invalid
+    const deposit = new Deposit(new Date(), amount, balance);
+    balance += amount;
+    transactions.push(deposit);
   }
 
-  function hasTooManyDecimals(amount) {
-    let numberOfDecimals = 0;
-
-    if (Math.floor(amount) !== amount) {
-      const decimalPart = amount.toString().split('.')[1];
-      numberOfDecimals = decimalPart.length || 0;
-    }
-
-    return numberOfDecimals > 2;
-  }
-
-  function isAmountInvalid(amount) {
-    return (amount === undefined)
-      || isNotNumber(amount)
-      || hasTooManyDecimals(amount)
-      || (amount === 0);
-  }
-
-  function validateDeposit(amount) {
-    if (isAmountInvalid(amount)) {
-      throw new Error('Unable to make deposit - amount is invalid');
-    }
-  }
-
-  function validateWithdrawl(amount) {
-    if (isAmountInvalid(amount)) {
-      throw new Error('Unable to make withdrawl - amount is invalid');
-    }
-
-    if (amount > balance) {
-      throw new Error('Unable to make withdrawl - insufficient funds');
-    }
+  function addWithdrawl(amount) {
+    // throws if withdrawl is invalid
+    const withdrawl = new Withdrawl(new Date(), amount, balance);
+    balance -= amount;
+    transactions.push(withdrawl);
   }
 
   this.deposit = function deposit(amount) {
     try {
-      const deposit = new Deposit(new Date(), amount, balance);
-      balance += amount;
-      transactions.push(deposit);
+      addDeposit(amount);
       return `${amount} successfully deposited`;
     } catch (error) {
       return error.message;
@@ -68,9 +31,7 @@ function Account() {
 
   this.withdraw = function withdraw(amount) {
     try {
-      const withdrawl = new Withdrawl(new Date(), amount, balance);
-      balance -= amount;
-      transactions.push(withdrawl);
+      addWithdrawl(amount);
       return `${amount} successfully withdrawn`;
     } catch (error) {
       return error.message;
