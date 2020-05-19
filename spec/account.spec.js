@@ -80,5 +80,9 @@ describe('Bank', () => {
     it('refuses withdrawls that arent numbers', () => {
       expect(account.withdraw('')).toEqual('Unable to make withdrawl - amount is not a number');
     });
+
+    it('refuses withdrawls that are numbers as strings', () => {
+      expect(account.withdraw('100')).toEqual('Unable to make withdrawl - amount is not a number');
+    });
   });
 });
