@@ -15,7 +15,8 @@ function Account() {
 
   function addWithdrawl(amount) {
     // throws if withdrawl is invalid
-    const withdrawl = new Withdrawl(new Date(), amount, balance);
+    const details = { date: new Date(), amount, balance};
+    const withdrawl = new Withdrawl(details);
     balance -= amount;
     transactions.push(withdrawl);
   }
