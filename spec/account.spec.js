@@ -46,6 +46,10 @@ describe('Bank', () => {
     it('refuses deposits that arent numbers', () => {
       expect(account.deposit('I am not a number')).toEqual('Unable to make deposit - amount is not a number');
     });
+
+    it('refuses deposits that are numbers as strings', () => {
+      expect(account.deposit('100')).toEqual('Unable to make deposit - amount is not a number');
+    });
   });
 
   describe('.withdraw', () => {

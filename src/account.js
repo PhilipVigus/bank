@@ -15,7 +15,8 @@ function Account() {
      * ? - decimal part is optional
      * $ - anchor to end
      */
-    return amount.toString().match(/^[-]?\d+(\.\d+)?$/) === null;
+    return amount.toString().match(/^[-]?\d+(\.\d+)?$/) === null
+      || typeof amount !== 'number';
   }
 
   function hasTooManyDecimals(amount) {
