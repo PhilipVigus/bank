@@ -100,32 +100,164 @@ undefined
 
 ### User stories
 
-These were the user stories I wrote based on the requirements and acceptance criteria I was given
+These were the user stories I wrote based on the requirements and acceptance criteria I was given. I completed manual feature tests based on each user requirement, and have printed example outputs showing each test passing below each story
+
+#### Story 1
 
 ```
 As a user
 So that I can see the current state of my balance
 I want to print my balance
+```
 
+Feature test passing:
+```
+Makerss-Air-2:bank student$ node
+Welcome to Node.js v14.2.0.
+Type ".help" for more information.
+> const Account = require('./src/account.js');
+undefined
+> account = new Account();
+Account {
+  deposit: [Function: deposit],
+  withdraw: [Function: withdraw],
+  printStatement: [Function: printStatement]
+}
+> account.deposit(100);
+'100.00 successfully deposited'
+> account.printStatement();
+'date || credit || debit || balance\n19/05/2020 || 100.00 || || 100.00'
+> 
+```
+
+#### Story 2
+
+```
 As a user
 So that my balance is easy to read
 I want the transactions to be in reverse chronological order,
 with credit, debit and balance columns
+```
 
+Feature test passing:
+```
+Makerss-Air-2:bank student$ node
+Welcome to Node.js v14.2.0.
+Type ".help" for more information.
+> const Account = require('./src/account.js');
+undefined
+> account = new Account();
+Account {
+  deposit: [Function: deposit],
+  withdraw: [Function: withdraw],
+  printStatement: [Function: printStatement]
+}
+> account.deposit(100);
+'100.00 successfully deposited'
+> account.printStatement();
+'date || credit || debit || balance\n19/05/2020 || 100.00 || || 100.00'
+> account.deposit(200);
+'200.00 successfully deposited'
+> account.deposit(300);
+'300.00 successfully deposited'
+> account.printStatement();
+'date || credit || debit || balance\n' +
+  '19/05/2020 || 300.00 || || 600.00\n' +
+  '19/05/2020 || 200.00 || || 300.00\n' +
+  '19/05/2020 || 100.00 || || 100.00'
+> 
+```
+
+#### Story 3
+
+```
 As a user
 So that I can access my money
 I want to be able to withdraw money
+```
 
+Feature test passing:
+```
+Makerss-Air-2:bank student$ node
+Welcome to Node.js v14.2.0.
+Type ".help" for more information.
+> const Account = require('./src/account.js');
+undefined
+> account = new Account();
+Account {
+  deposit: [Function: deposit],
+  withdraw: [Function: withdraw],
+  printStatement: [Function: printStatement]
+}
+> account.deposit(1000);
+'1000.00 successfully deposited'
+> account.withdraw(300);
+'300.00 successfully withdrawn'
+> 
+```
+
+#### Story 4
+
+```
 As a user
 So that I can save my money
 I want to be able to deposit money
+```
 
+Feature test passing:
+```
+Makerss-Air-2:bank student$ node
+Welcome to Node.js v14.2.0.
+Type ".help" for more information.
+> const Account = require('./src/account.js');
+undefined
+> account = new Account();
+Account {
+  deposit: [Function: deposit],
+  withdraw: [Function: withdraw],
+  printStatement: [Function: printStatement]
+}
+> account.deposit(1000);
+'1000.00 successfully deposited'
+> 
+```
+
+#### Story 5
+
+```
 As a user
 So that I know when a transaction was invalid
 I want to get meaningful error messages
 Criteria
 - amounts must be positive numbers with a maximum of 2 decimals places
 - withdrawls fail if there are insufficient funds in the account
+```
+
+Feature test passing:
+```
+Welcome to Node.js v14.2.0.
+Type ".help" for more information.
+> const Account = require('./src/account.js');
+undefined
+> account = new Account();
+Account {
+  deposit: [Function: deposit],
+  withdraw: [Function: withdraw],
+  printStatement: [Function: printStatement]
+}
+> account.deposit(-100);
+'Unable to make deposit - amount is invalid'
+> account.deposit(0);
+'Unable to make deposit - amount is invalid'
+> account.deposit('10');
+'Unable to make deposit - amount is invalid'
+> account.deposit('not a number');
+'Unable to make deposit - amount is invalid'
+> account.deposit();
+'Unable to make deposit - amount is invalid'
+> account.withdraw(100);
+'Unable to make withdrawl - insufficient funds'
+> 
 ```
 
 ### Implementation process and challenges
