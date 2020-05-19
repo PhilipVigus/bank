@@ -1,4 +1,4 @@
-function Withdrawl(amount, balance) {
+function Withdrawl(withdrawlAmount, balance) {
   function hasTooManyDecimals(number) {
     let numberOfDecimals = 0;
 
@@ -25,21 +25,24 @@ function Withdrawl(amount, balance) {
       || typeof value !== 'number';
   }
 
-  if (isNotNumber(amount)) {
-    throw new Error('Unable to make withdrawl - amount is invalid');
+  function isAmountInvalid(amount) {
+    return (amount === undefined)
+      || isNotNumber(amount)
+      || hasTooManyDecimals(amount)
+      || (amount === 0);
   }
 
-  if (amount <= 0) {
-    throw new Error('Unable to make withdrawl - amount is invalid');
+  function validateWithdrawl() {
+    if (isAmountInvalid(withdrawlAmount)) {
+      throw new Error('Unable to make withdrawl - amount is invalid');
+    }
+
+    if (withdrawlAmount > balance) {
+      throw new Error('Unable to make withdrawl - insufficient funds');
+    }
   }
 
-  if (amount > balance) {
-    throw new Error('Unable to make withdrawl - insufficient funds');
-  }
-
-  if (hasTooManyDecimals(amount)) {
-    throw new Error('Unable to make withdrawl - amount is invalid');
-  }
+  validateWithdrawl();
 }
 
 module.exports = Withdrawl;
