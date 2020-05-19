@@ -49,6 +49,10 @@ function Account() {
   }
 
   function validateWithdrawl(amount) {
+    if (amount === undefined) {
+      throw new Error('Unable to make withdrawl - amount is not specified');
+    }
+
     if (isNotNumber(amount)) {
       throw new Error('Unable to make withdrawl - amount is not a number');
     }
