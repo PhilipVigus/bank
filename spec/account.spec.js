@@ -33,23 +33,23 @@ describe('Bank', () => {
 
     describe('errors', () => {
       it('refuses deposits unless they are positive', () => {
-        expect(account.deposit(0)).toEqual('Unable to make deposit - amount must be positive');
+        expect(account.deposit(0)).toEqual('Unable to make deposit - amount is invalid');
       });
 
       it('refuses deposits with too many decimal places', () => {
-        expect(account.deposit(1000.123)).toEqual('Unable to make deposit - amount has too many decimal places');
+        expect(account.deposit(1000.123)).toEqual('Unable to make deposit - amount is invalid');
       });
 
       it('refuses deposits that arent numbers', () => {
-        expect(account.deposit('I am not a number')).toEqual('Unable to make deposit - amount is not a number');
+        expect(account.deposit('I am not a number')).toEqual('Unable to make deposit - amount is invalid');
       });
 
       it('refuses deposits that are numbers as strings', () => {
-        expect(account.deposit('100')).toEqual('Unable to make deposit - amount is not a number');
+        expect(account.deposit('100')).toEqual('Unable to make deposit - amount is invalid');
       });
 
       it('refuses deposits where no amount is specified', () => {
-        expect(account.deposit()).toEqual('Unable to make deposit - amount is not specified');
+        expect(account.deposit()).toEqual('Unable to make deposit - amount is invalid');
       });
     });
   });

@@ -31,30 +31,23 @@ function Account() {
   }
 
   function validateDeposit(amount) {
-    if (amount === undefined) {
-      throw new Error('Unable to make deposit - amount is not specified');
-    }
+    const isAmountInvalid = (amount === undefined)
+      || isNotNumber(amount)
+      || hasTooManyDecimals(amount)
+      || (amount === 0);
 
-    if (isNotNumber(amount)) {
-      throw new Error('Unable to make deposit - amount is not a number');
-    }
-
-    if (amount <= 0) {
-      throw new Error('Unable to make deposit - amount must be positive');
-    }
-
-    if (hasTooManyDecimals(amount)) {
-      throw new Error('Unable to make deposit - amount has too many decimal places');
+    if (isAmountInvalid) {
+      throw new Error('Unable to make deposit - amount is invalid');
     }
   }
 
   function validateWithdrawl(amount) {
-    const isValidAmount = amount === undefined
+    const isAmountInvalid = (amount === undefined)
       || isNotNumber(amount)
       || hasTooManyDecimals(amount)
-      || amount === 0;
+      || (amount === 0);
 
-    if (isValidAmount) {
+    if (isAmountInvalid) {
       throw new Error('Unable to make withdrawl - amount is invalid');
     }
 
