@@ -8,24 +8,25 @@ function Account() {
 
   function addDeposit(amount) {
     const details = { date: new Date(), amount, balance };
-    // throws if deposit is invalid
+    // throws error if deposit is invalid
     const deposit = new Deposit(details);
     balance += amount;
     transactions.push(deposit);
+    return `${amount} successfully deposited`;
   }
 
   function addWithdrawl(amount) {
     const details = { date: new Date(), amount, balance };
-    // throws if withdrawl is invalid
+    // throws error if withdrawl is invalid
     const withdrawl = new Withdrawl(details);
     balance -= amount;
     transactions.push(withdrawl);
+    return `${amount} successfully withdrawn`;
   }
 
   this.deposit = function deposit(amount) {
     try {
-      addDeposit(amount);
-      return `${amount} successfully deposited`;
+      return addDeposit(amount);
     } catch (error) {
       return error.message;
     }
@@ -33,8 +34,7 @@ function Account() {
 
   this.withdraw = function withdraw(amount) {
     try {
-      addWithdrawl(amount);
-      return `${amount} successfully withdrawn`;
+      return addWithdrawl(amount);
     } catch (error) {
       return error.message;
     }
