@@ -3,6 +3,10 @@ const Account = require('../src/account.js');
 describe('Account', () => {
   let account;
 
+  beforeEach(() => {
+    account = undefined;
+  });
+
   describe('.printStatement', () => {
     it('calls print on the statement', () => {
       const statementMockInstance = {
@@ -13,6 +17,7 @@ describe('Account', () => {
         return statementMockInstance;
       };
 
+      account = new Account({ Deposit: {}, Withdrawl: {} });
       account.printStatement(StatementMockFunction);
       expect(statementMockInstance.print).toHaveBeenCalled();
     });
