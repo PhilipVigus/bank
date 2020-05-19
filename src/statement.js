@@ -1,6 +1,6 @@
-function Statement(actions) {
+function Statement(accountHistory) {
   const STATEMENT_HEADER = 'date || credit || debit || balance';
-  const accountActions = actions;
+  const history = accountHistory;
 
   function dateToString(date) {
     const day = String(date.getDate()).padStart(2, '0');
@@ -18,7 +18,7 @@ function Statement(actions) {
   }
 
   function accountActionsToStatementString() {
-    const actionsInReverseOrder = accountActions.reverse();
+    const actionsInReverseOrder = history.reverse();
     const statementLines = actionsInReverseOrder.map((action) => {
       if (action.type === 'deposit') {
         return depositStatementLine(action.date, action.amount, action.balance);
@@ -31,7 +31,7 @@ function Statement(actions) {
   }
 
   this.print = function print() {
-    if (accountActions.length === 0) {
+    if (history.length === 0) {
       return STATEMENT_HEADER;
     }
 

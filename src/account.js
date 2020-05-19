@@ -1,7 +1,7 @@
 const StatementFunction = require('./statement.js');
 
 function Account() {
-  const history = [];
+  const transactions = [];
   let balance = 0;
 
   function isNotNumber(amount) {
@@ -70,7 +70,7 @@ function Account() {
     }
 
     balance += amount;
-    history.push({
+    transactions.push({
       type: 'deposit',
       date: new Date(),
       amount,
@@ -89,7 +89,7 @@ function Account() {
 
     balance -= amount;
 
-    history.push({
+    transactions.push({
       type: 'withdraw',
       date: new Date(),
       amount,
@@ -100,7 +100,7 @@ function Account() {
   };
 
   this.printStatement = function printStatement(Statement = StatementFunction) {
-    const statement = new Statement(history);
+    const statement = new Statement(transactions);
     return statement.print();
   };
 }

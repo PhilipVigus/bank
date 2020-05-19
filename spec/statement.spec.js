@@ -44,12 +44,12 @@ describe('Statement', () => {
           + `${dateString} || 2000.00 || || 3000.00\n`
           + `${dateString} || 1000.00 || || 1000.00`;
 
-        const accountHistory = [
+        const transactions = [
           { type: 'deposit', amount: 1000, balance: 1000, date },
           { type: 'deposit', amount: 2000, balance: 3000, date },
         ];
 
-        const statement = new Statement(accountHistory);
+        const statement = new Statement(transactions);
         expect(statement.print()).toEqual(expectedOutput);
       });
 
@@ -71,12 +71,12 @@ describe('Statement', () => {
         + `${dateString} || || 1000.00 || 2000.00\n`
         + `${dateString} || 3000.00 || || 3000.00`;
 
-        const accountHistory = [
+        const transactions = [
           { type: 'deposit', amount: 3000, balance: 3000, date },
           { type: 'withdraw', amount: 1000, balance: 2000, date },
         ];
 
-        const statement = new Statement(accountHistory);
+        const statement = new Statement(transactions);
         expect(statement.print()).toEqual(expectedOutput);
       });
 
@@ -85,12 +85,12 @@ describe('Statement', () => {
           + `${dateString} || || 2000.00 || 0.00\n`
           + `${dateString} || 2000.00 || || 2000.00`;
 
-        const accountHistory = [
+        const transactions = [
           { type: 'deposit', amount: 2000, balance: 2000, date },
           { type: 'withdraw', amount: 2000, balance: 0, date },
         ];
 
-        const statement = new Statement(accountHistory);
+        const statement = new Statement(transactions);
         expect(statement.print()).toEqual(expectedOutput);
       });
 
@@ -99,12 +99,12 @@ describe('Statement', () => {
           + `${dateString} || || 1000.50 || 999.50\n`
           + `${dateString} || 2000.00 || || 2000.00`;
 
-        const accountHistory = [
+        const transactions = [
           { type: 'deposit', amount: 2000, balance: 2000, date },
           { type: 'withdraw', amount: 1000.50, balance: 999.50, date },
         ];
 
-        const statement = new Statement(accountHistory);
+        const statement = new Statement(transactions);
         expect(statement.print()).toEqual(expectedOutput);
       });
     });
