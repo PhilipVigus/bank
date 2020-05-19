@@ -63,6 +63,41 @@ npm install
 npm run test
 ```
 
+### Interacting with the code
+
+```bash
+# start node on the commandline
+node
+
+# require account.js
+require('./src/account.js');
+
+# use any of the account public methods
+```
+
+Example output:
+
+```bash
+Makerss-Air-2:bank student$ node
+Welcome to Node.js v14.2.0.
+Type ".help" for more information.
+> const Account = require('./src/account.js');
+undefined
+> const account = new Account();
+undefined
+> account.deposit(100);
+'100 successfully deposited'
+> account.withdraw(50);
+'50 successfully withdrawn'
+> account.printStatement();
+'date || credit || debit || balance\n' +
+  '19/05/2020 || || 50.00 || 50.00\n' +
+  '19/05/2020 || 100.00 || || 100.00'
+> account.withdraw();
+'Unable to make withdrawl - amount is not specified'
+> 
+```
+
 ### User stories
 
 These were the user stories I wrote based on the requirements and acceptance criteria I was given
