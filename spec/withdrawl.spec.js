@@ -1,38 +1,50 @@
 const Withdrawl = require('../src/withdrawl.js');
 
 describe('Withdrawl', () => {
-  let date;
-  let dateString;
+  let date = new Date();
+  let withdrawl;
 
-  beforeEach(() => {
-    jasmine.clock().install();
-    jasmine.clock.mockDate;
-
-    date = new Date();
-    const day = String(date.getDate()).padStart(2, '0');
-    const month = String(date.getMonth() + 1).padStart(2, '0');
-    const year = date.getFullYear();
-    dateString = `${day}/${month}/${year}`;
+  describe('valid withdrawls', () => {
+    it('allows you to withdraw a valid amount', () => {
+      function isValidAmount() { return true; }
+      const details = { date, amount: 3000, balance: 3000 };
+      expect(() => { withdrawl = new Withdrawl(details, isValidAmount); }).not.toThrow();
+    });
   });
 
-  afterEach(() => {
-    jasmine.clock().uninstall();
-  });
-
-  it('can be created with a positive amount 1000 pounds', () => {
-    let withdrawl;
-    const details = { date, amount: 3000, balance: 3000 };
-    expect(() => { withdrawl = new Withdrawl(details); }).not.toThrow();
+  describe('invalid withdrawls', () => {
+    it('refuses a withdrawl when the amount is invalid', () => {
+      function isValidAmount() { return false; }
+      const details = { date, amount: 0, balance: 0 };
+      expect(() => { withdrawl = new Withdrawl(details, isValidAmount); }).toThrow(new Error('Unable to make withdrawl - amount is invalid'));
+    });
   });
 
   describe('.printStatementLine', () => {
+    let dateString;
+
+    beforeEach(() => {
+      jasmine.clock().install();
+      jasmine.clock.mockDate;
+
+      date = new Date();
+      const day = String(date.getDate()).padStart(2, '0');
+      const month = String(date.getMonth() + 1).padStart(2, '0');
+      const year = date.getFullYear();
+      dateString = `${day}/${month}/${year}`;
+    });
+
+    afterEach(() => {
+      jasmine.clock().uninstall();
+    });
+
     it('prints the line for the withdrawl', () => {
-      const withdrawl = new Withdrawl({ date, amount: 3000, balance: 4000 });
+      withdrawl = new Withdrawl({ date, amount: 3000, balance: 4000 });
       expect(withdrawl.printStatementLine()).toEqual(`${dateString} || || 3000.00 || 1000.00`);
     });
 
     it('prints the line for a decimal withdrawl', () => {
-      const withdrawl = new Withdrawl({ date, amount: 3000.12, balance: 4000 });
+      withdrawl = new Withdrawl({ date, amount: 3000.12, balance: 4000 });
       expect(withdrawl.printStatementLine()).toEqual(`${dateString} || || 3000.12 || 999.88`);
     });
   });
