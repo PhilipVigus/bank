@@ -3,12 +3,11 @@ function Statement(statementTransactions = []) {
   const transactions = statementTransactions;
 
   function accountActionsToStatementString() {
-    const transactionsInReverseOrder = transactions.reverse();
-    const statementLines = transactionsInReverseOrder.map((transaction) => {
+    const statementLines = transactions.map((transaction) => {
       return transaction.printStatementLine();
     });
 
-    return statementLines.join('\n');
+    return statementLines.reverse().join('\n');
   }
 
   this.print = function print() {
