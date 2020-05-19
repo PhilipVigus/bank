@@ -7,15 +7,16 @@ function Account() {
   let balance = 0;
 
   function addDeposit(amount) {
+    const details = { date: new Date(), amount, balance };
     // throws if deposit is invalid
-    const deposit = new Deposit(new Date(), amount, balance);
+    const deposit = new Deposit(details);
     balance += amount;
     transactions.push(deposit);
   }
 
   function addWithdrawl(amount) {
+    const details = { date: new Date(), amount, balance };
     // throws if withdrawl is invalid
-    const details = { date: new Date(), amount, balance};
     const withdrawl = new Withdrawl(details);
     balance -= amount;
     transactions.push(withdrawl);
