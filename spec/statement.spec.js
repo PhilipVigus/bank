@@ -4,7 +4,7 @@ describe('Statement', () => {
   let date;
   let dateString;
 
-  beforeAll(() => {
+  beforeEach(() => {
     jasmine.clock().install();
     date = new Date();
     jasmine.clock.mockDate;
@@ -15,7 +15,7 @@ describe('Statement', () => {
     dateString = `${day}/${month}/${year}`;
   });
 
-  afterAll(() => {
+  afterEach(() => {
     jasmine.clock().uninstall();
   });
 
