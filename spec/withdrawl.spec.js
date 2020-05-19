@@ -20,6 +20,12 @@ describe('Withdrawl', () => {
     });
   });
 
+  it('refuses a withdrawl with funds are unavailable', () => {
+    function isValidAmount() { return true; }
+    const details = { date, amount: 200, balance: 0 };
+    expect(() => { withdrawl = new Withdrawl(details, isValidAmount); }).toThrow(new Error('Unable to make withdrawl - insufficient funds'));
+  });
+
   describe('.printStatementLine', () => {
     let dateString;
 
