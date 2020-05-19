@@ -22,7 +22,7 @@ describe('Statement', () => {
   describe('.print', () => {
     describe('blank statements', () => {
       it('prints a blank statement', () => {
-        const statement = new Statement([]);
+        const statement = new Statement();
         expect(statement.print()).toEqual('date || credit || debit || balance');
       });
     });

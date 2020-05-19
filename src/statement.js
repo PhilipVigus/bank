@@ -1,4 +1,4 @@
-function Statement(accountHistory) {
+function Statement(accountHistory = []) {
   const STATEMENT_HEADER = 'date || credit || debit || balance';
   const history = accountHistory;
 
