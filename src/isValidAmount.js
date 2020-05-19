@@ -32,7 +32,7 @@ function isValidAmount(amount) {
   return (amount !== undefined)
   && isNumber(amount)
   && hasValidDecimals(amount)
-  && (amount !== 0);
+  && (amount > 0);
 }
 
 module.exports = isValidAmount;
