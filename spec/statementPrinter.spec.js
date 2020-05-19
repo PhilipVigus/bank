@@ -45,8 +45,8 @@ describe('AccountPrinter', () => {
           + `${dateString} || 1000.00 || || 1000.00`;
 
         const accountHistory = [
-          { type: 'deposit', amount: 2000, balance: 3000, date },
           { type: 'deposit', amount: 1000, balance: 1000, date },
+          { type: 'deposit', amount: 2000, balance: 3000, date },
         ];
 
         const statementPrinter = new StatementPrinter(accountHistory);
@@ -72,8 +72,8 @@ describe('AccountPrinter', () => {
         + `${dateString} || 3000.00 || || 3000.00`;
 
         const accountHistory = [
-          { type: 'withdraw', amount: 1000, balance: 2000, date },
           { type: 'deposit', amount: 3000, balance: 3000, date },
+          { type: 'withdraw', amount: 1000, balance: 2000, date },
         ];
 
         const statementPrinter = new StatementPrinter(accountHistory);
@@ -86,8 +86,8 @@ describe('AccountPrinter', () => {
           + `${dateString} || 2000.00 || || 2000.00`;
 
         const accountHistory = [
-          { type: 'withdraw', amount: 2000, balance: 0, date },
           { type: 'deposit', amount: 2000, balance: 2000, date },
+          { type: 'withdraw', amount: 2000, balance: 0, date },
         ];
 
         const statementPrinter = new StatementPrinter(accountHistory);
@@ -100,8 +100,8 @@ describe('AccountPrinter', () => {
           + `${dateString} || 2000.00 || || 2000.00`;
 
         const accountHistory = [
-          { type: 'withdraw', amount: 1000.50, balance: 999.50, date },
           { type: 'deposit', amount: 2000, balance: 2000, date },
+          { type: 'withdraw', amount: 1000.50, balance: 999.50, date },
         ];
 
         const statementPrinter = new StatementPrinter(accountHistory);

@@ -43,7 +43,7 @@ function Account() {
     }
 
     balance += amount;
-    history.unshift({
+    history.push({
       type: 'deposit',
       date: new Date(),
       amount,
@@ -72,7 +72,7 @@ function Account() {
 
     balance -= amount;
 
-    history.unshift({
+    history.push({
       type: 'withdraw',
       date: new Date(),
       amount,

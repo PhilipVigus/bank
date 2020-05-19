@@ -18,15 +18,16 @@ function StatementPrinter(actions) {
   }
 
   function accountActionsToStatementString() {
-    const statement = accountActions.map((action) => {
+    const actionsInReverseOrder = accountActions.reverse();
+    const statementLines = actionsInReverseOrder.map((action) => {
       if (action.type === 'deposit') {
         return depositStatementLine(action.date, action.amount, action.balance);
       } else {
         return withdrawlStatementLine(action.date, action.amount, action.balance);
       }
-    }).join('\n');
+    });
 
-    return statement;
+    return statementLines.join('\n');
   }
 
   this.printStatement = function printStatement() {
