@@ -53,5 +53,10 @@ describe('Deposit', () => {
       const deposit = new Deposit({ date, amount: 3000, balance: 0 });
       expect(deposit.printStatementLine()).toEqual(`${dateString} || 3000.00 || || 3000.00`);
     });
+
+    it('prints the line for a decimal deposit', () => {
+      const deposit = new Deposit({ date, amount: 3000.12, balance: 0 });
+      expect(deposit.printStatementLine()).toEqual(`${dateString} || 3000.12 || || 3000.12`);
+    });
   });
 });

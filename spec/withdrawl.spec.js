@@ -59,5 +59,10 @@ describe('Withdrawl', () => {
       const withdrawl = new Withdrawl({ date, amount: 3000, balance: 4000 });
       expect(withdrawl.printStatementLine()).toEqual(`${dateString} || || 3000.00 || 1000.00`);
     });
+
+    it('prints the line for a decimal withdrawl', () => {
+      const withdrawl = new Withdrawl({ date, amount: 3000.12, balance: 4000 });
+      expect(withdrawl.printStatementLine()).toEqual(`${dateString} || || 3000.12 || 999.88`);
+    });
   });
 });

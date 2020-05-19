@@ -27,86 +27,52 @@ describe('Statement', () => {
       });
     });
 
-    describe('deposits', () => {
-      it('prints a deposit', () => {
-        const expectedOutput = 'date || credit || debit || balance\n'
-          + `${dateString} || 2000.00 || || 2000.00`;
+    it('calls printStatementLine on the first statement transaction', () => {
+      const transaction1 = {
+        type: 'deposit',
+        amount: 2000,
+        balanceAfterDeposit: 2000,
+        date,
+        printStatementLine() {},
+      };
 
-        const statement = new Statement([{
-          type: 'deposit', amount: 2000, balanceAfterDeposit: 2000, date,
-        }]);
+      const transaction2 = {
+        type: 'withdrawl',
+        amount: 1000,
+        balanceAfterDeposit: 1000,
+        date,
+        printStatementLine() {},
+      };
 
-        expect(statement.print()).toEqual(expectedOutput);
-      });
+      spyOn(transaction1, 'printStatementLine');
 
-      it('prints multiple deposits', () => {
-        const expectedOutput = 'date || credit || debit || balance\n'
-          + `${dateString} || 2000.00 || || 3000.00\n`
-          + `${dateString} || 1000.00 || || 1000.00`;
-
-        const transactions = [
-          { type: 'deposit', amount: 1000, balanceAfterDeposit: 1000, date },
-          { type: 'deposit', amount: 2000, balanceAfterDeposit: 3000, date },
-        ];
-
-        const statement = new Statement(transactions);
-        expect(statement.print()).toEqual(expectedOutput);
-      });
-
-      it('prints a decimal deposit', () => {
-        const expectedOutput = 'date || credit || debit || balance\n'
-          + `${dateString} || 2000.32 || || 2000.32`;
-
-        const statement = new Statement([{
-          type: 'deposit', amount: 2000.32, balanceAfterDeposit: 2000.32, date,
-        }]);
-
-        expect(statement.print()).toEqual(expectedOutput);
-      });
+      const statement = new Statement([transaction1, transaction2]);
+      statement.print();
+      expect(transaction1.printStatementLine).toHaveBeenCalled();
     });
 
-    describe('withdrawls', () => {
-      it('prints a withdrawl of 1000', () => {
-        const expectedOutput = 'date || credit || debit || balance\n'
-        + `${dateString} || || 1000.00 || 2000.00\n`
-        + `${dateString} || 3000.00 || || 3000.00`;
+    it('calls printStatementLine on the second statement transaction', () => {
+      const transaction1 = {
+        type: 'deposit',
+        amount: 2000,
+        balanceAfterDeposit: 2000,
+        date,
+        printStatementLine() {},
+      };
 
-        const transactions = [
-          { type: 'deposit', amount: 3000, balanceAfterDeposit: 3000, date },
-          { type: 'withdraw', amount: 1000, balanceAfterWithdrawl: 2000, date },
-        ];
+      const transaction2 = {
+        type: 'withdrawl',
+        amount: 1000,
+        balanceAfterDeposit: 1000,
+        date,
+        printStatementLine() {},
+      };
 
-        const statement = new Statement(transactions);
-        expect(statement.print()).toEqual(expectedOutput);
-      });
+      spyOn(transaction2, 'printStatementLine');
 
-      it('prints a withdrawl of 2000', () => {
-        const expectedOutput = 'date || credit || debit || balance\n'
-          + `${dateString} || || 2000.00 || 0.00\n`
-          + `${dateString} || 2000.00 || || 2000.00`;
-
-        const transactions = [
-          { type: 'deposit', amount: 2000, balanceAfterDeposit: 2000, date },
-          { type: 'withdraw', amount: 2000, balanceAfterWithdrawl: 0, date },
-        ];
-
-        const statement = new Statement(transactions);
-        expect(statement.print()).toEqual(expectedOutput);
-      });
-
-      it('prints a withdrawl of 1000.32', () => {
-        const expectedOutput = 'date || credit || debit || balance\n'
-          + `${dateString} || || 1000.50 || 999.50\n`
-          + `${dateString} || 2000.00 || || 2000.00`;
-
-        const transactions = [
-          { type: 'deposit', amount: 2000, balanceAfterDeposit: 2000, date },
-          { type: 'withdraw', amount: 1000.50, balanceAfterWithdrawl: 999.50, date },
-        ];
-
-        const statement = new Statement(transactions);
-        expect(statement.print()).toEqual(expectedOutput);
-      });
+      const statement = new Statement([transaction1, transaction2]);
+      statement.print();
+      expect(transaction2.printStatementLine).toHaveBeenCalled();
     });
   });
 });
