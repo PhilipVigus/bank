@@ -1,4 +1,4 @@
-const StatementPrinterFunction = require('./statementPrinter.js');
+const StatementFunction = require('./statement.js');
 
 function Account() {
   const history = [];
@@ -82,9 +82,9 @@ function Account() {
     return `${amount} successfully withdrawn`;
   };
 
-  this.printStatement = function printStatement(Printer = StatementPrinterFunction) {
-    const statementPrinter = new Printer(history);
-    return statementPrinter.printStatement();
+  this.printStatement = function printStatement(Statement = StatementFunction) {
+    const statement = new Statement(history);
+    return statement.printStatement();
   };
 }
 

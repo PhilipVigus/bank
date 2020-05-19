@@ -1,6 +1,6 @@
-const StatementPrinter = require('../src/statementPrinter.js');
+const Statement = require('../src/statement.js');
 
-describe('AccountPrinter', () => {
+describe('Statement', () => {
   let date;
   let dateString;
 
@@ -19,27 +19,27 @@ describe('AccountPrinter', () => {
     jasmine.clock().uninstall();
   });
 
-  describe('.printStatement', () => {
+  describe('.print', () => {
     describe('blank statements', () => {
       it('prints a blank statement', () => {
-        const statementPrinter = new StatementPrinter([]);
-        expect(statementPrinter.printStatement()).toEqual('date || credit || debit || balance');
+        const statement = new Statement([]);
+        expect(statement.print()).toEqual('date || credit || debit || balance');
       });
     });
 
     describe('deposits', () => {
-      it('shows a deposit', () => {
+      it('prints a deposit', () => {
         const expectedOutput = 'date || credit || debit || balance\n'
           + `${dateString} || 2000.00 || || 2000.00`;
 
-        const statementPrinter = new StatementPrinter([{
+        const statement = new Statement([{
           type: 'deposit', amount: 2000, balance: 2000, date,
         }]);
 
-        expect(statementPrinter.printStatement()).toEqual(expectedOutput);
+        expect(statement.print()).toEqual(expectedOutput);
       });
 
-      it('shows multiple deposits', () => {
+      it('prints multiple deposits', () => {
         const expectedOutput = 'date || credit || debit || balance\n'
           + `${dateString} || 2000.00 || || 3000.00\n`
           + `${dateString} || 1000.00 || || 1000.00`;
@@ -49,24 +49,24 @@ describe('AccountPrinter', () => {
           { type: 'deposit', amount: 2000, balance: 3000, date },
         ];
 
-        const statementPrinter = new StatementPrinter(accountHistory);
-        expect(statementPrinter.printStatement()).toEqual(expectedOutput);
+        const statement = new Statement(accountHistory);
+        expect(statement.print()).toEqual(expectedOutput);
       });
 
-      it('shows a decimal deposit', () => {
+      it('prints a decimal deposit', () => {
         const expectedOutput = 'date || credit || debit || balance\n'
           + `${dateString} || 2000.32 || || 2000.32`;
 
-        const statementPrinter = new StatementPrinter([{
+        const statement = new Statement([{
           type: 'deposit', amount: 2000.32, balance: 2000.32, date,
         }]);
 
-        expect(statementPrinter.printStatement()).toEqual(expectedOutput);
+        expect(statement.print()).toEqual(expectedOutput);
       });
     });
 
     describe('withdrawls', () => {
-      it('shows a withdrawl of 1000', () => {
+      it('prints a withdrawl of 1000', () => {
         const expectedOutput = 'date || credit || debit || balance\n'
         + `${dateString} || || 1000.00 || 2000.00\n`
         + `${dateString} || 3000.00 || || 3000.00`;
@@ -76,11 +76,11 @@ describe('AccountPrinter', () => {
           { type: 'withdraw', amount: 1000, balance: 2000, date },
         ];
 
-        const statementPrinter = new StatementPrinter(accountHistory);
-        expect(statementPrinter.printStatement()).toEqual(expectedOutput);
+        const statement = new Statement(accountHistory);
+        expect(statement.print()).toEqual(expectedOutput);
       });
 
-      it('shows a withdrawl of 2000', () => {
+      it('prints a withdrawl of 2000', () => {
         const expectedOutput = 'date || credit || debit || balance\n'
           + `${dateString} || || 2000.00 || 0.00\n`
           + `${dateString} || 2000.00 || || 2000.00`;
@@ -90,11 +90,11 @@ describe('AccountPrinter', () => {
           { type: 'withdraw', amount: 2000, balance: 0, date },
         ];
 
-        const statementPrinter = new StatementPrinter(accountHistory);
-        expect(statementPrinter.printStatement()).toEqual(expectedOutput);
+        const statement = new Statement(accountHistory);
+        expect(statement.print()).toEqual(expectedOutput);
       });
 
-      it('shows a withdrawl of 1000.32', () => {
+      it('prints a withdrawl of 1000.32', () => {
         const expectedOutput = 'date || credit || debit || balance\n'
           + `${dateString} || || 1000.50 || 999.50\n`
           + `${dateString} || 2000.00 || || 2000.00`;
@@ -104,8 +104,8 @@ describe('AccountPrinter', () => {
           { type: 'withdraw', amount: 1000.50, balance: 999.50, date },
         ];
 
-        const statementPrinter = new StatementPrinter(accountHistory);
-        expect(statementPrinter.printStatement()).toEqual(expectedOutput);
+        const statement = new Statement(accountHistory);
+        expect(statement.print()).toEqual(expectedOutput);
       });
     });
   });

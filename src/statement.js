@@ -1,4 +1,4 @@
-function StatementPrinter(actions) {
+function Statement(actions) {
   const STATEMENT_HEADER = 'date || credit || debit || balance';
   const accountActions = actions;
 
@@ -30,7 +30,7 @@ function StatementPrinter(actions) {
     return statementLines.join('\n');
   }
 
-  this.printStatement = function printStatement() {
+  this.print = function print() {
     if (accountActions.length === 0) {
       return STATEMENT_HEADER;
     }
@@ -39,4 +39,4 @@ function StatementPrinter(actions) {
   };
 }
 
-module.exports = StatementPrinter;
+module.exports = Statement;
