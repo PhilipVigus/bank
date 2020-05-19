@@ -32,9 +32,9 @@ function Account() {
 
   function isAmountInvalid(amount) {
     return (amount === undefined)
-    || isNotNumber(amount)
-    || hasTooManyDecimals(amount)
-    || (amount === 0);
+      || isNotNumber(amount)
+      || hasTooManyDecimals(amount)
+      || (amount === 0);
   }
 
   function validateDeposit(amount) {
