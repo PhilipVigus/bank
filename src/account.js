@@ -30,24 +30,21 @@ function Account() {
     return numberOfDecimals > 2;
   }
 
-  function validateDeposit(amount) {
-    const isAmountInvalid = (amount === undefined)
-      || isNotNumber(amount)
-      || hasTooManyDecimals(amount)
-      || (amount === 0);
+  function isAmountInvalid(amount) {
+    return (amount === undefined)
+    || isNotNumber(amount)
+    || hasTooManyDecimals(amount)
+    || (amount === 0);
+  }
 
-    if (isAmountInvalid) {
+  function validateDeposit(amount) {
+    if (isAmountInvalid(amount)) {
       throw new Error('Unable to make deposit - amount is invalid');
     }
   }
 
   function validateWithdrawl(amount) {
-    const isAmountInvalid = (amount === undefined)
-      || isNotNumber(amount)
-      || hasTooManyDecimals(amount)
-      || (amount === 0);
-
-    if (isAmountInvalid) {
+    if (isAmountInvalid(amount)) {
       throw new Error('Unable to make withdrawl - amount is invalid');
     }
 
