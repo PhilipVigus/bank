@@ -30,7 +30,8 @@ date || credit || debit || balance
 |----------	|------------------	|
 | Language 	| Javascript(node) 	|
 | Testing  	| Jasmine          	|
-| Linting   | ESLint            |
+| Linting    | ESLint            |
+| Code Coverage	| nyc					|
 
 ### Getting started
 
@@ -148,19 +149,20 @@ My initial steps were too rushed, and although I was following TDD, it meant tha
 - The two transaction types (withdrawl and deposit) are in their own functions, which would make it relatively straightforward to add additional types at a later date.
 - IsValidAmount is a utility function used in several places, so it made sense for that to be extracted into its own file to prevent code duplication.
 
+In the main, the implementation developed organically, with refactorings and general design decisions naturally coming out of the tests I was writing. However, there were a couple of issues that merit further discussion.
+
 #### Refactoring
 
 The first major refactoring split the Statement function away from Account. As I was coding, a clear separation in responsibility developed within the Account function, and it was a straightforward decision to extract the Statement function out.
 
 The second major refactoring involved creating Deposit and Withdraw functions. I initially resisted this, prefering to keep all display logic within the Statement function. However, on reflection it made sense to create the two types of transaction, with Statement calling them to get how they should be displayed on the statement. I'm pleased with how this worked out, and it greatly simplified the Statement code.
 
-In the main, the implementation developed organically, with refactorings and general design decisions naturally coming out of the tests I was writing. However, there were a couple of issues that merit further discussion:
 
 #### Not using function prototypes
 
 This was something I thought long and hard about. Function prototypes are mostly useful in a scenario where you expect those functions to be used as part of prototypal inheritance. However, their use makes implementation of information hiding and privacy more complex, and code less readable.
 
-It could be argued that accounts should be implemented using prototypes so that the system is easy to extend with additional account types. However, the Account function only has three public functions at the moment, and is relatively straightforward. It wouldn't be difficult to refactor so that it uses prototypes if necessary, and I felt that based on the specifications I was given, having simpler code was more important.
+I chose not to use them simply because I felt that the improved code readability from doing so outweighed any benefits their use might add at this stage. It wouldn't be difficult to refactor so that the code uses prototypes if necessary, and I felt that based on the specifications I was given, having simpler code was more important.
 
 #### Validation of user input
 
