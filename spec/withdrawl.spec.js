@@ -31,7 +31,7 @@ describe('Withdrawl', () => {
 
     beforeEach(() => {
       jasmine.clock().install();
-      jasmine.clock.mockDate;
+      jasmine.clock().mockDate();
 
       date = new Date();
       const day = String(date.getDate()).padStart(2, '0');

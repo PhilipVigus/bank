@@ -2,17 +2,11 @@ const Statement = require('../src/statement.js');
 
 describe('Statement', () => {
   let date;
-  let dateString;
 
   beforeEach(() => {
     jasmine.clock().install();
+    jasmine.clock().mockDate();
     date = new Date();
-    jasmine.clock.mockDate;
-
-    const day = String(date.getDate()).padStart(2, '0');
-    const month = String(date.getMonth() + 1).padStart(2, '0');
-    const year = date.getFullYear();
-    dateString = `${day}/${month}/${year}`;
   });
 
   afterEach(() => {

@@ -3,10 +3,7 @@ function Statement(statementTransactions = []) {
   const transactions = statementTransactions;
 
   function accountActionsToStatementString() {
-    const statementLines = transactions.map((transaction) => {
-      return transaction.printStatementLine();
-    });
-
+    const statementLines = transactions.map((transaction) => transaction.printStatementLine());
     return statementLines.reverse().join('\n');
   }
 
