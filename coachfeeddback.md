@@ -37,22 +37,23 @@ Tests
 	* Account requires you to provide an object with transaction types (i.e. deposit and withdrawl? (Again, is withdrawl the right word?) I haven’t looked at the implementation yet but that doesn’t seem right.
 		* these are Account dependencies 
 
-        - Deposit
-            - You’re doing some function definitions and arrow functions. Using both in one file looks inconsistent. If not being defined on the top level, preferably they should be arrows.
-            - Some of the lines are too long. Your linter OK’d them?
-            - You’ve got a chunky beforeEach and an after each function here. Is there no other way of doing this?
-            - A deposit holds the balance?
-        - isValidAmount
-            - How else has the JS ecosystem solved this problem?
-        - Statement
-            - More before/after blocks I see…
-            - `transaction1` I never want to see an integer in a variable name
-            - You’re defining transactions in unit tests for statement. What’s another way of solving the need for data in a test file?
-            - Transactions need a lot of info! Six things?
-        - withdrawl
-            - I really think this is the wrong word.
-            - I didn’t notice it on deposit. But I think injecting isValidAmount is taking dependency injection a little too far.
-            - Same comments about arrow functions, line length and before/after functions.
+* Deposit
+	* You’re doing some function definitions and arrow functions. Using both in one file looks inconsistent. If not being defined on the top level, preferably they should be arrows.
+	* Some of the lines are too long. Your linter OK’d them?
+	* You’ve got a chunky beforeEach and an after each function here. Is there no other way of doing this?
+	* fixed
+	* A deposit holds the balance?
+* isValidAmount
+	* How else has the JS ecosystem solved this problem?
+* Statement
+	* More before/after blocks I see…
+	* `transaction1` I never want to see an integer in a variable name
+	* You’re defining transactions in unit tests for statement. What’s another way of solving the need for data in a test file?
+	* Transactions need a lot of info! Six things?
+* withdrawl
+	* I really think this is the wrong word.
+	* I didn’t notice it on deposit. But I think injecting isValidAmount is taking dependency injection a little too far.
+	* Same comments about arrow functions, line length and before/after functions.
 
 Implementation
 OK. So this is a big-y. And I now understand your point about prototype construction in the readme. You’re allowing for es6 syntax so I think everything other than isValidAmount should be a class.
