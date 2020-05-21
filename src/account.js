@@ -1,51 +1,53 @@
 import Statement from './statement';
 import Transaction from './transaction';
 
-export default function Account(TransactionClass = Transaction) {
-  const transactions = [];
-  let balance = 0;
+export default class AccountNew {
+  constructor() {
+    this.transactions = [];
+    this.balance = 0;
+  }
 
-  function addDeposit(amount) {
+  addDeposit(amount, TransactionClass = Transaction) {
     // throws error if deposit is invalid
     const deposit = new TransactionClass(new Date(), amount, 'deposit');
-    balance += amount;
-    transactions.push(deposit);
+    this.balance += amount;
+    this.transactions.push(deposit);
     return `${amount.toFixed(2)} successfully deposited`;
   }
 
-  function addWithdrawal(amount) {
+  addWithdrawal(amount, TransactionClass = Transaction) {
     // throws error if withdrawal is invalid
     const withdrawal = new TransactionClass(new Date(), amount, 'withdrawal');
-    balance -= amount;
-    transactions.push(withdrawal);
+    this.balance -= amount;
+    this.transactions.push(withdrawal);
     return `${amount.toFixed(2)} successfully withdrawn`;
   }
 
-  function checkAvailableFunds(amount) {
-    if (amount > balance) {
+  checkAvailableFunds(amount) {
+    if (amount > this.balance) {
       throw new Error('Unable to make withdrawal - insufficient funds');
     }
   }
 
-  this.deposit = function deposit(amount) {
+  deposit(amount) {
     try {
-      return addDeposit(amount);
+      return this.addDeposit(amount);
     } catch (error) {
       return error.message;
     }
-  };
+  }
 
-  this.withdraw = function withdraw(amount) {
+  withdraw(amount) {
     try {
-      checkAvailableFunds(amount);
-      return addWithdrawal(amount);
+      this.checkAvailableFunds(amount);
+      return this.addWithdrawal(amount);
     } catch (error) {
       return error.message;
     }
-  };
+  }
 
-  this.printStatement = function printStatement(St = Statement) {
-    const statement = new St(transactions);
+  printStatement(StatementClass = Statement) {
+    const statement = new StatementClass(this.transactions);
     return statement.print();
-  };
+  }
 }

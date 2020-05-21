@@ -1,4 +1,4 @@
-import Account from '../src/accountNew';
+import Account from '../src/account';
 
 describe('Account', () => {
   describe('.printStatement', () => {
