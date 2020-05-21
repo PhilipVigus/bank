@@ -1,52 +1,53 @@
-const StatementFunction = require('./statement.js');
-const DepositFunction = require('./deposit.js');
-const WithdrawlFunction = require('./withdrawl.js');
+import Statement from './statement.js';
+import Transaction from './transaction.js';
 
-function Account(transactionTypes = {
-  Deposit: DepositFunction,
-  Withdrawl: WithdrawlFunction,
-}) {
-  const transactions = [];
-  let balance = 0;
+export default class AccountNew {
+  constructor() {
+    this.transactions = [];
+    this.balance = 0;
+  }
 
-  function addDeposit(amount) {
-    const details = { date: new Date(), amount, balance };
+  addDeposit(amount, TransactionClass = Transaction) {
     // throws error if deposit is invalid
-    const deposit = new transactionTypes.Deposit(details);
-    balance += amount;
-    transactions.push(deposit);
+    const deposit = new TransactionClass(new Date(), amount, 'deposit');
+    this.balance += amount;
+    this.transactions.push(deposit);
     return `${amount.toFixed(2)} successfully deposited`;
   }
 
-  function addWithdrawl(amount) {
-    const details = { date: new Date(), amount, balance };
-    // throws error if withdrawl is invalid
-    const withdrawl = new transactionTypes.Withdrawl(details);
-    balance -= amount;
-    transactions.push(withdrawl);
+  addWithdrawal(amount, TransactionClass = Transaction) {
+    // throws error if withdrawal is invalid
+    const withdrawal = new TransactionClass(new Date(), amount, 'withdrawal');
+    this.balance -= amount;
+    this.transactions.push(withdrawal);
     return `${amount.toFixed(2)} successfully withdrawn`;
   }
 
-  this.deposit = function deposit(amount) {
+  checkAvailableFunds(amount) {
+    if (amount > this.balance) {
+      throw new Error('Unable to make withdrawal - insufficient funds');
+    }
+  }
+
+  deposit(amount) {
     try {
-      return addDeposit(amount);
+      return this.addDeposit(amount);
     } catch (error) {
       return error.message;
     }
-  };
+  }
 
-  this.withdraw = function withdraw(amount) {
+  withdraw(amount) {
     try {
-      return addWithdrawl(amount);
+      this.checkAvailableFunds(amount);
+      return this.addWithdrawal(amount);
     } catch (error) {
       return error.message;
     }
-  };
+  }
 
-  this.printStatement = function printStatement(Statement = StatementFunction) {
-    const statement = new Statement(transactions);
+  printStatement(StatementClass = Statement) {
+    const statement = new StatementClass(this.transactions);
     return statement.print();
-  };
+  }
 }
-
-module.exports = Account;

@@ -1,4 +1,4 @@
-const Account = require('../src/account.js');
+import Account from '../src/account';
 
 describe('Account', () => {
   describe('.printStatement', () => {
@@ -11,40 +11,34 @@ describe('Account', () => {
         return statementMockInstance;
       };
 
-      const account = new Account({ Deposit: {}, Withdrawl: {} });
+      const account = new Account();
       account.printStatement(StatementMockFunction);
-      expect(statementMockInstance.print).toHaveBeenCalled();
+
+      expect(statementMockInstance.print).toHaveBeenCalledWith();
     });
   });
 
   describe('.deposit', () => {
     it('creates a new deposit', () => {
-      const DepositMock = function DepositMock() {
+      const TransactionMock = function DepositMock() {
         return {};
       };
 
-      const transactionTypes = {
-        Deposit: DepositMock,
-        Withdraw: {},
-      };
+      const account = new Account(TransactionMock);
 
-      const account = new Account(transactionTypes);
       expect(account.deposit(100)).toEqual('100.00 successfully deposited');
     });
   });
 
   describe('.withdraw', () => {
-    it('creates a withdrawl', () => {
-      const WithdrawlMock = function WithdrawlMock() {
+    it('creates a withdrawal', () => {
+      const TransactionMock = function TransactionMock() {
         return {};
       };
 
-      const transactionTypes = {
-        Deposit: {},
-        Withdrawl: WithdrawlMock,
-      };
+      const account = new Account(TransactionMock);
+      account.deposit(100);
 
-      const account = new Account(transactionTypes);
       expect(account.withdraw(100)).toEqual('100.00 successfully withdrawn');
     });
   });

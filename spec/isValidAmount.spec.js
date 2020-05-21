@@ -1,4 +1,4 @@
-const isValidAmount = require('../src/isValidAmount.js');
+import isValidAmount from '../src/isValidAmount';
 
 describe('isValidAmount', () => {
   it('returns true if the amount is valid', () => {

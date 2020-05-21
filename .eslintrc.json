@@ -6,7 +6,12 @@
         "jasmine": true
     },
     "extends": [
-        "airbnb-base"
+        "airbnb-base",
+        "airbnb",
+        "eslint:recommended",
+        "plugin:jasmine/recommended",
+        "prettier",
+        "prettier/react"
     ],
     "globals": {
         "Atomics": "readonly",
@@ -16,8 +21,10 @@
         "ecmaVersion": 2018
     },
     "plugins": [
-        "jasmine"
+        "jasmine",
+        "prettier"
     ],
     "rules": {
+        "prettier/prettier": "error"
     }
 }
