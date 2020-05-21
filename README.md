@@ -1,6 +1,7 @@
 # Bank technical challenge
 
 ![](./account-screenshot.png)
+
 This repository contains my attempt that the Makers Academy individual technical test that can be found [here](https://github.com/makersacademy/course/blob/master/individual_challenges/bank_tech_test.md)
 
 ## Specification
@@ -66,41 +67,16 @@ npm install
 ```bash
 # run tests from the project root with the following command
 npm run test
+
+# get a coverage report
+npm run coverage
 ```
 
 ### Interacting with the code
 
 ```bash
-# start node on the commandline
-node
-
-# require account.js
-require('./src/account.js');
-
-# use any of the account public methods
-```
-
-Example output:
-
-```bash
-Makerss-Air-2:bank student$ node
-Welcome to Node.js v14.2.0.
-Type ".help" for more information.
-> const Account = require('./src/account.js');
-undefined
-> const account = new Account();
-undefined
-> account.deposit(100);
-'100 successfully deposited'
-> account.withdraw(50);
-'50 successfully withdrawn'
-> account.printStatement();
-'date || credit || debit || balance\n' +
-  '19/05/2020 || || 50.00 || 50.00\n' +
-  '19/05/2020 || 100.00 || || 100.00'
-> account.withdraw();
-'Unable to make withdrawal - amount is not specified'
->
+# run the following file to see the code in action
+node exampleCodeUsage.js
 ```
 
 ### User stories
@@ -143,36 +119,25 @@ Criteria
 
 ### Implementation process and challenges
 
-My initial steps were too rushed, and although I was following TDD, it meant that I made unnecessary mistakes. Once I slowed down, progress was far smoother.
-
 #### Structure
 
-[![](https://mermaid.ink/img/eyJjb2RlIjoiY2xhc3NEaWFncmFtXG5cdEFjY291bnQgPHwtLSBEZXBvc2l0XG5cdEFjY291bnQgPHwtLSBXaXRoZHJhd2xcblx0RGVwb3NpdCA8fC0tIGlzVmFsaWRBbW91bnRcblx0V2l0aGRyYXdsIDx8LS0gaXNWYWxpZEFtb3VudFxuXHRBY2NvdW50IDx8LS0gU3RhdGVtZW50XG5cdGNsYXNzIEFjY291bnR7XG5cdFx0K3dpdGhkcmF3KGFtb3VudClcblx0XHQrZGVwb3NpdChhbW91bnQpXG5cdFx0K3ByaW50U3RhdGVtZW50KClcblx0XHQtYWRkV2l0aGRyYXdsKClcblx0XHQtYWRkRGVwb3NpdCgpXG5cdFx0LXRyYW5zYWN0aW9uc1tdXG5cdFx0LWludCBiYWxhbmNlXG5cdH1cblxuXHRjbGFzcyBEZXBvc2l0e1xuXHRcdC12YWxpZGF0ZUFtb3VudChhbW91bnQpXG5cdFx0LXZhbGlkYXRlRGVwb3NpdChhbW91bnQpXG5cdFx0LWRhdGVUb1N0cmluZyhkYXRlKVxuXHRcdCtwcmludFN0YXRlbWVudExpbmUoKVxuXHRcdCtzdHJpbmcgdHlwZVxuXHRcdCtkYXRlIGRhdGVcblx0XHQrZmxvYXQgYW1vdW50XG5cdFx0K2Zsb2F0IGJhbGFuY2VBZnRlckRlcG9zaXRcblx0fVxuXHRjbGFzcyBpc1ZhbGlkQW1vdW50e1xuXHRcdCtpc1ZhbGlkQW1vdW50KClcblx0XHQtaXNOdW1iZXIoKVxuXHRcdC1oYXNWYWxpZERlY2ltYWxzKClcblx0XHQtZ2V0RGVjaW1hbHMoKVxuXHR9XG5cdGNsYXNzIFN0YXRlbWVudHtcblx0XHQtc3RyaW5nIFNUQVRFTUVOVF9IRUFERVJcblx0XHQtdHJhbnNhY3Rpb25zXG5cdFx0LWFjY291bnRBY3Rpb25zVG9TdGF0ZW1lbnRTdHJpbmcoKVxuXHRcdCtwcmludCgpXG5cdH1cblx0Y2xhc3MgV2l0aGRyYXdse1xuXHQgICAgLXZhbGlkYXRlQXZhaWxhYmxlRnVuZHMoKVxuXHRcdC12YWxpZGF0ZUFtb3VudCgpXG5cdFx0LXZhbGlkYXRlV2l0aGRyYXdsKClcblx0XHQtZGF0ZVRvU3RyaW5nKClcblx0XHQrcHJpbnRTdGF0ZW1lbnRMaW5lKClcblx0XHQrc3RyaW5nIHR5cGVcblx0XHQrZGF0ZSBkYXRlXG5cdFx0K2Zsb2F0IGFtb3VudFxuXHRcdCtmbG9hdCBiYWxhbmNlQWZ0ZXJXaXRoZHJhd2xcblx0fSIsIm1lcm1haWQiOnsidGhlbWUiOiJkZWZhdWx0In0sInVwZGF0ZUVkaXRvciI6ZmFsc2V9)](https://mermaid-js.github.io/mermaid-live-editor/#/edit/eyJjb2RlIjoiY2xhc3NEaWFncmFtXG5cdEFjY291bnQgPHwtLSBEZXBvc2l0XG5cdEFjY291bnQgPHwtLSBXaXRoZHJhd2xcblx0RGVwb3NpdCA8fC0tIGlzVmFsaWRBbW91bnRcblx0V2l0aGRyYXdsIDx8LS0gaXNWYWxpZEFtb3VudFxuXHRBY2NvdW50IDx8LS0gU3RhdGVtZW50XG5cdGNsYXNzIEFjY291bnR7XG5cdFx0K3dpdGhkcmF3KGFtb3VudClcblx0XHQrZGVwb3NpdChhbW91bnQpXG5cdFx0K3ByaW50U3RhdGVtZW50KClcblx0XHQtYWRkV2l0aGRyYXdsKClcblx0XHQtYWRkRGVwb3NpdCgpXG5cdFx0LXRyYW5zYWN0aW9uc1tdXG5cdFx0LWludCBiYWxhbmNlXG5cdH1cblxuXHRjbGFzcyBEZXBvc2l0e1xuXHRcdC12YWxpZGF0ZUFtb3VudChhbW91bnQpXG5cdFx0LXZhbGlkYXRlRGVwb3NpdChhbW91bnQpXG5cdFx0LWRhdGVUb1N0cmluZyhkYXRlKVxuXHRcdCtwcmludFN0YXRlbWVudExpbmUoKVxuXHRcdCtzdHJpbmcgdHlwZVxuXHRcdCtkYXRlIGRhdGVcblx0XHQrZmxvYXQgYW1vdW50XG5cdFx0K2Zsb2F0IGJhbGFuY2VBZnRlckRlcG9zaXRcblx0fVxuXHRjbGFzcyBpc1ZhbGlkQW1vdW50e1xuXHRcdCtpc1ZhbGlkQW1vdW50KClcblx0XHQtaXNOdW1iZXIoKVxuXHRcdC1oYXNWYWxpZERlY2ltYWxzKClcblx0XHQtZ2V0RGVjaW1hbHMoKVxuXHR9XG5cdGNsYXNzIFN0YXRlbWVudHtcblx0XHQtc3RyaW5nIFNUQVRFTUVOVF9IRUFERVJcblx0XHQtdHJhbnNhY3Rpb25zXG5cdFx0LWFjY291bnRBY3Rpb25zVG9TdGF0ZW1lbnRTdHJpbmcoKVxuXHRcdCtwcmludCgpXG5cdH1cblx0Y2xhc3MgV2l0aGRyYXdse1xuXHQgICAgLXZhbGlkYXRlQXZhaWxhYmxlRnVuZHMoKVxuXHRcdC12YWxpZGF0ZUFtb3VudCgpXG5cdFx0LXZhbGlkYXRlV2l0aGRyYXdsKClcblx0XHQtZGF0ZVRvU3RyaW5nKClcblx0XHQrcHJpbnRTdGF0ZW1lbnRMaW5lKClcblx0XHQrc3RyaW5nIHR5cGVcblx0XHQrZGF0ZSBkYXRlXG5cdFx0K2Zsb2F0IGFtb3VudFxuXHRcdCtmbG9hdCBiYWxhbmNlQWZ0ZXJXaXRoZHJhd2xcblx0fSIsIm1lcm1haWQiOnsidGhlbWUiOiJkZWZhdWx0In0sInVwZGF0ZUVkaXRvciI6ZmFsc2V9)
+[![](https://mermaid.ink/img/eyJjb2RlIjoiY2xhc3NEaWFncmFtXG5cdEFjY291bnQgPHwtLSBUcmFuc2FjdGlvblxuXHRUcmFuc2FjdGlvbiA8fC0tIGlzVmFsaWRBbW91bnRcblx0QWNjb3VudCA8fC0tIFN0YXRlbWVudFxuXHRjbGFzcyBBY2NvdW50e1xuXHRcdCt3aXRoZHJhdyhhbW91bnQpXG5cdFx0K2RlcG9zaXQoYW1vdW50KVxuXHRcdCtwcmludFN0YXRlbWVudCgpXG5cdFx0LWFkZFdpdGhkcmF3bCgpXG5cdFx0LWFkZERlcG9zaXQoKVxuXHRcdC1jaGVja0F2YWlsYWJsZUZ1bmRzKClcblx0XHQtdHJhbnNhY3Rpb25zW11cblx0XHQtaW50IGJhbGFuY2Vcblx0fVxuXHRjbGFzcyBpc1ZhbGlkQW1vdW50e1xuXHRcdCtpc1ZhbGlkQW1vdW50KGFtb3VudClcblx0XHQtaXNOdW1iZXIobnVtYmVyKVxuXHRcdC1oYXNWYWxpZERlY2ltYWxzKG51bWJlcilcblx0XHQtZ2V0RGVjaW1hbHMobnVtYmVyKVxuXHR9XG5cdGNsYXNzIFN0YXRlbWVudHtcblx0XHQtc3RyaW5nIFNUQVRFTUVOVF9IRUFERVJcblx0XHQtdHJhbnNhY3Rpb25zW11cblx0XHQtZGF0ZVRvU3RyaW5nKGRhdGUpXG5cdFx0LXRyYW5zYWN0aW9uc1RvU3RhdGVtZW50U3RyaW5nKClcblx0XHQrcHJpbnQoKVxuXHR9XG5cdGNsYXNzIFRyYW5zYWN0aW9ue1xuXHRcdC12YWxpZGF0ZVRyYW5zYWN0aW9uKGFtb3VudClcblx0XHQtdmFsaWRhdGVBbW91bnQoYW1vdW50KVxuXHRcdCtzdHJpbmcgdHlwZVxuXHRcdCtkYXRlIGRhdGVcblx0XHQrZmxvYXQgYW1vdW50XG5cdH0iLCJtZXJtYWlkIjp7InRoZW1lIjoiZGVmYXVsdCJ9LCJ1cGRhdGVFZGl0b3IiOmZhbHNlfQ)](https://mermaid-js.github.io/mermaid-live-editor/#/edit/eyJjb2RlIjoiY2xhc3NEaWFncmFtXG5cdEFjY291bnQgPHwtLSBUcmFuc2FjdGlvblxuXHRUcmFuc2FjdGlvbiA8fC0tIGlzVmFsaWRBbW91bnRcblx0QWNjb3VudCA8fC0tIFN0YXRlbWVudFxuXHRjbGFzcyBBY2NvdW50e1xuXHRcdCt3aXRoZHJhdyhhbW91bnQpXG5cdFx0K2RlcG9zaXQoYW1vdW50KVxuXHRcdCtwcmludFN0YXRlbWVudCgpXG5cdFx0LWFkZFdpdGhkcmF3bCgpXG5cdFx0LWFkZERlcG9zaXQoKVxuXHRcdC1jaGVja0F2YWlsYWJsZUZ1bmRzKClcblx0XHQtdHJhbnNhY3Rpb25zW11cblx0XHQtaW50IGJhbGFuY2Vcblx0fVxuXHRjbGFzcyBpc1ZhbGlkQW1vdW50e1xuXHRcdCtpc1ZhbGlkQW1vdW50KGFtb3VudClcblx0XHQtaXNOdW1iZXIobnVtYmVyKVxuXHRcdC1oYXNWYWxpZERlY2ltYWxzKG51bWJlcilcblx0XHQtZ2V0RGVjaW1hbHMobnVtYmVyKVxuXHR9XG5cdGNsYXNzIFN0YXRlbWVudHtcblx0XHQtc3RyaW5nIFNUQVRFTUVOVF9IRUFERVJcblx0XHQtdHJhbnNhY3Rpb25zW11cblx0XHQtZGF0ZVRvU3RyaW5nKGRhdGUpXG5cdFx0LXRyYW5zYWN0aW9uc1RvU3RhdGVtZW50U3RyaW5nKClcblx0XHQrcHJpbnQoKVxuXHR9XG5cdGNsYXNzIFRyYW5zYWN0aW9ue1xuXHRcdC12YWxpZGF0ZVRyYW5zYWN0aW9uKGFtb3VudClcblx0XHQtdmFsaWRhdGVBbW91bnQoYW1vdW50KVxuXHRcdCtzdHJpbmcgdHlwZVxuXHRcdCtkYXRlIGRhdGVcblx0XHQrZmxvYXQgYW1vdW50XG5cdH0iLCJtZXJtYWlkIjp7InRoZW1lIjoiZGVmYXVsdCJ9LCJ1cGRhdGVFZGl0b3IiOmZhbHNlfQ)
 
-- The code is separated into 4 classes, with 1 utility function
-- The two transaction types (withdrawal and deposit) are in their own functions, which would make it relatively straightforward to add additional types at a later date.
-- IsValidAmount is a utility function used in several places, so it made sense for that to be extracted into its own file to prevent code duplication.
+- The code is separated into 3 classes. I had originally implemented separate Deposit and Withdrawal classes, but decided that there was not a sufficient case for doing this. 99% of the code was shared between them, so I combined them into a generic Transaction class instead.
+- IsValidAmount is a utility function. Although it is only used in the Transaction class, it made sense to extract this functionality out into its own module, and made the Transaction class a lot simpler.
 
 In the main, the implementation developed organically, with refactorings and general design decisions naturally coming out of the tests I was writing. However, there were a couple of issues that merit further discussion.
 
 #### Refactoring
 
-The first major refactoring split the Statement function away from Account. As I was coding, a clear separation in responsibility developed within the Account function, and it was a straightforward decision to extract the Statement function out.
+The first major refactoring split the Statement class away from Account. As I was coding, a clear separation in responsibility developed within the Account account, and it was a straightforward decision to extract the Statement class out.
 
-The second major refactoring involved creating Deposit and Withdraw functions. I initially resisted this, prefering to keep all display logic within the Statement function. However, on reflection it made sense to create the two types of transaction, with Statement calling them to get how they should be displayed on the statement. I'm pleased with how this worked out, and it greatly simplified the Statement code.
+The second major refactoring involved creating Deposit and Withdraw classes. I initially resisted this, prefering to keep all display logic within the Statement class. However, on reflection it made sense to create the two types of transaction, with Statement calling them to get how they should be displayed on the statement.
 
-#### Not using function prototypes
-
-This was something I thought long and hard about. Function prototypes are mostly useful in a scenario where you expect those functions to be used as part of prototypal inheritance. However, their use makes implementation of information hiding and privacy more complex, and code less readable.
-
-I chose not to use them simply because I felt that the improved code readability from doing so outweighed any benefits their use might add at this stage. It wouldn't be difficult to refactor so that the code uses prototypes if necessary, and I felt that based on the specifications I was given, having simpler code was more important.
+My third refactoring effectively undid the second. On reflection, the Deposit and Withdraw classes were not sufficiently different to justify their own classes. Instead I combined them into a more general Transaction class.
 
 #### Validation of user input
 
 It took a while to work out the best way of checking that deposit and withdrawal amounts are numbers. Javascript doesn't make this easy, and there are downsides to most of the standard approaches. Many of these have loopholes relating to implicit type coersion that meant I didn't feel they were appropriate to use.
 
 Although using a regex feels clunky, I feel it is probably the most consistent and sound approach when used in conjunction with the other validation checks in place.
-
-#### Feature testing
-
-For some reason I went down the route of manual feature testing using the Node console rather than writing the tests in Jasmine. However, this was a relatively easy fix once I realised, which was partway through the first self-reflection.

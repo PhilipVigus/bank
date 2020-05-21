@@ -1,4 +1,4 @@
-import isValidAmount from './isValidAmount';
+import isValidAmount from './isValidAmount.js';
 
 export default class Transaction {
   constructor(date, amount, type) {

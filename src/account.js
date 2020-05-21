@@ -1,5 +1,5 @@
-import Statement from './statement';
-import Transaction from './transaction';
+import Statement from './statement.js';
+import Transaction from './transaction.js';
 
 export default class AccountNew {
   constructor() {
