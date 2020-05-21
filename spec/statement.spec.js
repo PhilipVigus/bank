@@ -1,17 +1,7 @@
 const Statement = require('../src/statement.js');
 
 describe('Statement', () => {
-  let date;
-
-  beforeEach(() => {
-    jasmine.clock().install();
-    jasmine.clock().mockDate();
-    date = new Date();
-  });
-
-  afterEach(() => {
-    jasmine.clock().uninstall();
-  });
+  const date = new Date();
 
   describe('.print', () => {
     describe('blank statements', () => {

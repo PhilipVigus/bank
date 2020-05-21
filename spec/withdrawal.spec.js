@@ -1,7 +1,7 @@
 const Withdrawal = require('../src/withdrawal.js');
 
 describe('withdrawal', () => {
-  let date = new Date();
+  const date = new Date('2020-5-6');
   let withdrawal;
 
   describe('valid withdrawals', () => {
@@ -42,22 +42,7 @@ describe('withdrawal', () => {
   });
 
   describe('.printStatementLine', () => {
-    let dateString;
-
-    beforeEach(() => {
-      jasmine.clock().install();
-      jasmine.clock().mockDate();
-
-      date = new Date();
-      const day = String(date.getDate()).padStart(2, '0');
-      const month = String(date.getMonth() + 1).padStart(2, '0');
-      const year = date.getFullYear();
-      dateString = `${day}/${month}/${year}`;
-    });
-
-    afterEach(() => {
-      jasmine.clock().uninstall();
-    });
+    const dateString = '06/05/2020';
 
     it('prints the line for the withdrawal', () => {
       withdrawal = new Withdrawal({ date, amount: 3000, balance: 4000 });
