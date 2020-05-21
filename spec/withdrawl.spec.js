@@ -63,7 +63,7 @@ describe('Withdrawl', () => {
       withdrawl = new Withdrawl({ date, amount: 3000, balance: 4000 });
 
       expect(withdrawl.printStatementLine()).toEqual(
-        `${dateString} || || 3000.00 || 1000.00`,
+        `${dateString} || || 3000.00 || 1000.00`
       );
     });
 
@@ -71,7 +71,7 @@ describe('Withdrawl', () => {
       withdrawl = new Withdrawl({ date, amount: 3000.12, balance: 4000 });
 
       expect(withdrawl.printStatementLine()).toEqual(
-        `${dateString} || || 3000.12 || 999.88`,
+        `${dateString} || || 3000.12 || 999.88`
       );
     });
   });

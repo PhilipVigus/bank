@@ -52,7 +52,7 @@ describe('Deposit', () => {
       deposit = new Deposit({ date, amount: 3000, balance: 0 });
 
       expect(deposit.printStatementLine()).toEqual(
-        `${dateString} || 3000.00 || || 3000.00`,
+        `${dateString} || 3000.00 || || 3000.00`
       );
     });
 
@@ -60,7 +60,7 @@ describe('Deposit', () => {
       deposit = new Deposit({ date, amount: 3000.12, balance: 0 });
 
       expect(deposit.printStatementLine()).toEqual(
-        `${dateString} || 3000.12 || || 3000.12`,
+        `${dateString} || 3000.12 || || 3000.12`
       );
     });
   });

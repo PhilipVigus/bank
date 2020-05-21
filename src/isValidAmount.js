@@ -25,17 +25,17 @@ function isNumber(value) {
    * $ - anchor to end
    */
   return (
-    value.toString().match(/^[-]?\d+(\.\d+)?$/) !== null
-    && typeof value === 'number'
+    value.toString().match(/^[-]?\d+(\.\d+)?$/) !== null &&
+    typeof value === 'number'
   );
 }
 
 function isValidAmount(amount) {
   return (
-    amount !== undefined
-    && isNumber(amount)
-    && hasValidDecimals(amount)
-    && amount > 0
+    amount !== undefined &&
+    isNumber(amount) &&
+    hasValidDecimals(amount) &&
+    amount > 0
   );
 }
 

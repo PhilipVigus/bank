@@ -27,7 +27,7 @@ function Withdrawl(withdrawlDetails, isValidAmount = isValidAmountFunction) {
 
   this.printStatementLine = function printStatementLine() {
     return `${dateToString(this.date)} || || ${this.amount.toFixed(
-      2,
+      2
     )} || ${this.balanceAfterWithdrawl.toFixed(2)}`;
   };
 
@@ -36,7 +36,8 @@ function Withdrawl(withdrawlDetails, isValidAmount = isValidAmountFunction) {
   this.type = 'withdrawl';
   this.date = withdrawlDetails.date;
   this.amount = withdrawlDetails.amount;
-  this.balanceAfterWithdrawl = withdrawlDetails.balance - withdrawlDetails.amount;
+  this.balanceAfterWithdrawl =
+    withdrawlDetails.balance - withdrawlDetails.amount;
 }
 
 module.exports = Withdrawl;

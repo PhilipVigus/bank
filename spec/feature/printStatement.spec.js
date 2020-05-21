@@ -5,13 +5,13 @@ describe('user printing statements', () => {
     const account = new Account();
 
     expect(account.printStatement()).toEqual(
-      'date || credit || debit || balance',
+      'date || credit || debit || balance'
     );
   });
 
   it('prints a deposit', () => {
-    const expectedOutput = 'date || credit || debit || balance\n'
-      + '19/05/2020 || 100.00 || || 100.00';
+    const expectedOutput =
+      'date || credit || debit || balance\n19/05/2020 || 100.00 || || 100.00';
 
     const account = new Account();
     account.deposit(100);
@@ -20,9 +20,10 @@ describe('user printing statements', () => {
   });
 
   it('prints a withdrawl', () => {
-    const expectedOutput = 'date || credit || debit || balance\n'
-      + '19/05/2020 || || 100.00 || 0.00\n'
-      + '19/05/2020 || 100.00 || || 100.00';
+    const expectedOutput =
+      'date || credit || debit || balance\n' +
+      '19/05/2020 || || 100.00 || 0.00\n' +
+      '19/05/2020 || 100.00 || || 100.00';
 
     const account = new Account();
     account.deposit(100);
@@ -32,10 +33,11 @@ describe('user printing statements', () => {
   });
 
   it('prints in reverse chronological order', () => {
-    const expectedOutput = 'date || credit || debit || balance\n'
-      + '19/05/2020 || || 100.45 || 2000.09\n'
-      + '19/05/2020 || 2000.21 || || 2100.54\n'
-      + '19/05/2020 || 100.33 || || 100.33';
+    const expectedOutput =
+      'date || credit || debit || balance\n' +
+      '19/05/2020 || || 100.45 || 2000.09\n' +
+      '19/05/2020 || 2000.21 || || 2100.54\n' +
+      '19/05/2020 || 100.33 || || 100.33';
 
     const account = new Account();
     account.deposit(100.33);

@@ -12,7 +12,7 @@ describe('user withdrawing money', () => {
     const account = new Account();
 
     expect(account.withdraw(-100)).toEqual(
-      'Unable to make withdrawl - amount is invalid',
+      'Unable to make withdrawl - amount is invalid'
     );
   });
 
@@ -20,7 +20,7 @@ describe('user withdrawing money', () => {
     const account = new Account();
 
     expect(account.withdraw('Not a number')).toEqual(
-      'Unable to make withdrawl - amount is invalid',
+      'Unable to make withdrawl - amount is invalid'
     );
   });
 
@@ -28,7 +28,7 @@ describe('user withdrawing money', () => {
     const account = new Account();
 
     expect(account.withdraw('100')).toEqual(
-      'Unable to make withdrawl - amount is invalid',
+      'Unable to make withdrawl - amount is invalid'
     );
   });
 
@@ -36,7 +36,7 @@ describe('user withdrawing money', () => {
     const account = new Account();
 
     expect(account.withdraw()).toEqual(
-      'Unable to make withdrawl - amount is invalid',
+      'Unable to make withdrawl - amount is invalid'
     );
   });
 
@@ -44,7 +44,7 @@ describe('user withdrawing money', () => {
     const account = new Account();
 
     expect(account.withdraw(100)).toEqual(
-      'Unable to make withdrawl - insufficient funds',
+      'Unable to make withdrawl - insufficient funds'
     );
   });
 });

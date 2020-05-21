@@ -11,7 +11,7 @@ describe('user depositing money', () => {
     const account = new Account();
 
     expect(account.deposit(-100)).toEqual(
-      'Unable to make deposit - amount is invalid',
+      'Unable to make deposit - amount is invalid'
     );
   });
 
@@ -19,7 +19,7 @@ describe('user depositing money', () => {
     const account = new Account();
 
     expect(account.deposit('Not a number')).toEqual(
-      'Unable to make deposit - amount is invalid',
+      'Unable to make deposit - amount is invalid'
     );
   });
 
@@ -27,7 +27,7 @@ describe('user depositing money', () => {
     const account = new Account();
 
     expect(account.deposit('100')).toEqual(
-      'Unable to make deposit - amount is invalid',
+      'Unable to make deposit - amount is invalid'
     );
   });
 
@@ -35,7 +35,7 @@ describe('user depositing money', () => {
     const account = new Account();
 
     expect(account.deposit()).toEqual(
-      'Unable to make deposit - amount is invalid',
+      'Unable to make deposit - amount is invalid'
     );
   });
 });

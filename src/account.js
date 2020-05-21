@@ -6,7 +6,7 @@ function Account(
   transactionTypes = {
     Deposit: DepositFunction,
     Withdrawl: WithdrawlFunction,
-  },
+  }
 ) {
   const transactions = [];
   let balance = 0;
