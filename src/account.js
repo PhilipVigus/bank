@@ -1,7 +1,7 @@
 import Statement from './statement.js';
 import Transaction from './transaction.js';
 
-export default class AccountNew {
+export default class Account {
   constructor() {
     this.transactions = [];
     this.balance = 0;
