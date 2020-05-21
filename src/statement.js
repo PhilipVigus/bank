@@ -11,26 +11,30 @@ export default class Statement {
     return `${day}/${month}/${year}`;
   }
 
-  accountActionsToStatementString() {
+  static getDepositLine(deposit, balance) {
+    const line = `${Statement.dateToString(
+      deposit.date
+    )} || ${deposit.amount.toFixed(2)} || || ${balance.toFixed(2)}`;
+    return line;
+  }
+
+  static getWithdrawalLine(withdrawal, balance) {
+    const line = `${Statement.dateToString(
+      withdrawal.date
+    )} || || ${withdrawal.amount.toFixed(2)} || ${balance.toFixed(2)}`;
+    return line;
+  }
+
+  transactionsToStatementString() {
     let runningBalance = 0;
     const statementLines = this.transactions.map((transaction) => {
       if (transaction.type === 'deposit') {
         runningBalance += transaction.amount;
-        const line = `${Statement.dateToString(
-          transaction.date
-        )} || ${transaction.amount.toFixed(2)} || || ${runningBalance.toFixed(
-          2
-        )}`;
-        return line;
+        return Statement.getDepositLine(transaction, runningBalance);
       }
 
       runningBalance -= transaction.amount;
-      const line = `${Statement.dateToString(
-        transaction.date
-      )} || || ${transaction.amount.toFixed(2)} || ${runningBalance.toFixed(
-        2
-      )}`;
-      return line;
+      return Statement.getWithdrawalLine(transaction, runningBalance);
     });
 
     return statementLines.reverse().join('\n');
@@ -41,8 +45,6 @@ export default class Statement {
       return this.STATEMENT_HEADER;
     }
 
-    return `${
-      this.STATEMENT_HEADER
-    }\n${this.accountActionsToStatementString()}`;
+    return `${this.STATEMENT_HEADER}\n${this.transactionsToStatementString()}`;
   }
 }
