@@ -17,7 +17,7 @@ describe('Account feature tests', () => {
     jasmine.clock().uninstall();
   });
 
-  it('lets the user deposit and withdraw money, and print their account statement', () => {
+  it('deposit and withdraw money, print their account statement', () => {
     const account = new Account();
 
     expect(account.printStatement()).toEqual(
