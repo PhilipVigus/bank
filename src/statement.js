@@ -1,20 +1,22 @@
-export default function Statement(accountTransactions = []) {
-  const STATEMENT_HEADER = 'date || credit || debit || balance';
-  const transactions = accountTransactions;
+export default class Statement {
+  constructor(accountTransactions = []) {
+    this.STATEMENT_HEADER = 'date || credit || debit || balance';
+    this.transactions = accountTransactions;
+  }
 
-  function dateToString(date) {
+  static dateToString(date) {
     const day = String(date.getDate()).padStart(2, '0');
     const month = String(date.getMonth() + 1).padStart(2, '0');
     const year = date.getFullYear();
     return `${day}/${month}/${year}`;
   }
 
-  function accountActionsToStatementString() {
+  accountActionsToStatementString() {
     let runningBalance = 0;
-    const statementLines = transactions.map((transaction) => {
+    const statementLines = this.transactions.map((transaction) => {
       if (transaction.type === 'deposit') {
         runningBalance += transaction.amount;
-        const line = `${dateToString(
+        const line = `${Statement.dateToString(
           transaction.date
         )} || ${transaction.amount.toFixed(2)} || || ${runningBalance.toFixed(
           2
@@ -23,7 +25,7 @@ export default function Statement(accountTransactions = []) {
       }
 
       runningBalance -= transaction.amount;
-      const line = `${dateToString(
+      const line = `${Statement.dateToString(
         transaction.date
       )} || || ${transaction.amount.toFixed(2)} || ${runningBalance.toFixed(
         2
@@ -34,11 +36,13 @@ export default function Statement(accountTransactions = []) {
     return statementLines.reverse().join('\n');
   }
 
-  this.print = function print() {
-    if (transactions.length === 0) {
-      return STATEMENT_HEADER;
+  print() {
+    if (this.transactions.length === 0) {
+      return this.STATEMENT_HEADER;
     }
 
-    return `${STATEMENT_HEADER}\n${accountActionsToStatementString()}`;
-  };
+    return `${
+      this.STATEMENT_HEADER
+    }\n${this.accountActionsToStatementString()}`;
+  }
 }
