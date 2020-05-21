@@ -8,7 +8,6 @@ export default class Account {
   }
 
   addDeposit(amount, TransactionClass = Transaction) {
-    // throws error if deposit is invalid
     const deposit = new TransactionClass(new Date(), amount, 'deposit');
     this.balance += amount;
     this.transactionList.push(deposit);
@@ -16,7 +15,6 @@ export default class Account {
   }
 
   addWithdrawal(amount, TransactionClass = Transaction) {
-    // throws error if withdrawal is invalid
     const withdrawal = new TransactionClass(new Date(), amount, 'withdrawal');
     this.balance -= amount;
     this.transactionList.push(withdrawal);
