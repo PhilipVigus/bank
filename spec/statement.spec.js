@@ -4,12 +4,10 @@ describe('Statement', () => {
   const date = new Date();
 
   describe('.print', () => {
-    describe('blank statements', () => {
-      it('prints a blank statement', () => {
-        const statement = new Statement();
+    it('prints a blank statement', () => {
+      const statement = new Statement();
 
-        expect(statement.print()).toEqual('date || credit || debit || balance');
-      });
+      expect(statement.print()).toEqual('date || credit || debit || balance');
     });
 
     it('prints a statement with transactions', () => {
