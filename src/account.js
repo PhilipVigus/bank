@@ -1,13 +1,13 @@
 import Statement from './statement';
 import Transaction from './transaction';
 
-export default function Account() {
+export default function Account(TransactionClass = Transaction) {
   const transactions = [];
   let balance = 0;
 
   function addDeposit(amount) {
     // throws error if deposit is invalid
-    const deposit = new Transaction(new Date(), amount, 'deposit');
+    const deposit = new TransactionClass(new Date(), amount, 'deposit');
     balance += amount;
     transactions.push(deposit);
     return `${amount.toFixed(2)} successfully deposited`;
@@ -15,7 +15,7 @@ export default function Account() {
 
   function addWithdrawal(amount) {
     // throws error if withdrawal is invalid
-    const withdrawal = new Transaction(new Date(), amount, 'withdrawal');
+    const withdrawal = new TransactionClass(new Date(), amount, 'withdrawal');
     balance -= amount;
     transactions.push(withdrawal);
     return `${amount.toFixed(2)} successfully withdrawn`;
