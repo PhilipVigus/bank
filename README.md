@@ -77,6 +77,13 @@ npm run coverage
 ```bash
 # run the following file to see the code in action
 node exampleCodeUsage.js
+
+# note this will not currently work as the REPL does not recognise ES6 imports
+# start the node REPL
+node
+# load the Account class
+import Account from './src/account.js'
+
 ```
 
 ### User stories
