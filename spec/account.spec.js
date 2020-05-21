@@ -47,6 +47,7 @@ describe('Account', () => {
       };
 
       const account = new Account(transactionTypes);
+      account.deposit(100);
 
       expect(account.withdraw(100)).toEqual('100.00 successfully withdrawn');
     });

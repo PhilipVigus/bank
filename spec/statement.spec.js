@@ -3,7 +3,7 @@ import Statement from '../src/statement';
 describe('Statement', () => {
   const date = new Date();
 
-  describe('.print', () => {
+  xdescribe('.print', () => {
     describe('blank statements', () => {
       it('prints a blank statement', () => {
         const statement = new Statement();
