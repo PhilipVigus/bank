@@ -6,24 +6,39 @@ describe('Withdrawl', () => {
 
   describe('valid withdrawls', () => {
     it('allows you to withdraw a valid amount', () => {
-      function isValidAmount() { return true; }
+      function isValidAmount() {
+        return true;
+      }
       const details = { date, amount: 3000, balance: 3000 };
-      expect(() => { withdrawl = new Withdrawl(details, isValidAmount); }).not.toThrow();
+
+      expect(() => {
+        withdrawl = new Withdrawl(details, isValidAmount);
+      }).not.toThrow();
     });
   });
 
   describe('invalid withdrawls', () => {
     it('refuses a withdrawl when the amount is invalid', () => {
-      function isValidAmount() { return false; }
+      function isValidAmount() {
+        return false;
+      }
       const details = { date, amount: 0, balance: 0 };
-      expect(() => { withdrawl = new Withdrawl(details, isValidAmount); }).toThrow(new Error('Unable to make withdrawl - amount is invalid'));
+
+      expect(() => {
+        withdrawl = new Withdrawl(details, isValidAmount);
+      }).toThrow(new Error('Unable to make withdrawl - amount is invalid'));
     });
   });
 
   it('refuses a withdrawl with funds are unavailable', () => {
-    function isValidAmount() { return true; }
+    function isValidAmount() {
+      return true;
+    }
     const details = { date, amount: 200, balance: 0 };
-    expect(() => { withdrawl = new Withdrawl(details, isValidAmount); }).toThrow(new Error('Unable to make withdrawl - insufficient funds'));
+
+    expect(() => {
+      withdrawl = new Withdrawl(details, isValidAmount);
+    }).toThrow(new Error('Unable to make withdrawl - insufficient funds'));
   });
 
   describe('.printStatementLine', () => {
@@ -46,12 +61,18 @@ describe('Withdrawl', () => {
 
     it('prints the line for the withdrawl', () => {
       withdrawl = new Withdrawl({ date, amount: 3000, balance: 4000 });
-      expect(withdrawl.printStatementLine()).toEqual(`${dateString} || || 3000.00 || 1000.00`);
+
+      expect(withdrawl.printStatementLine()).toEqual(
+        `${dateString} || || 3000.00 || 1000.00`,
+      );
     });
 
     it('prints the line for a decimal withdrawl', () => {
       withdrawl = new Withdrawl({ date, amount: 3000.12, balance: 4000 });
-      expect(withdrawl.printStatementLine()).toEqual(`${dateString} || || 3000.12 || 999.88`);
+
+      expect(withdrawl.printStatementLine()).toEqual(
+        `${dateString} || || 3000.12 || 999.88`,
+      );
     });
   });
 });

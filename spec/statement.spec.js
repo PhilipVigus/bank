@@ -17,6 +17,7 @@ describe('Statement', () => {
     describe('blank statements', () => {
       it('prints a blank statement', () => {
         const statement = new Statement();
+
         expect(statement.print()).toEqual('date || credit || debit || balance');
       });
     });
@@ -42,7 +43,8 @@ describe('Statement', () => {
 
       const statement = new Statement([transaction1, transaction2]);
       statement.print();
-      expect(transaction1.printStatementLine).toHaveBeenCalled();
+
+      expect(transaction1.printStatementLine).toHaveBeenCalledWith();
     });
 
     it('calls printStatementLine on the second statement transaction', () => {
@@ -66,7 +68,8 @@ describe('Statement', () => {
 
       const statement = new Statement([transaction1, transaction2]);
       statement.print();
-      expect(transaction2.printStatementLine).toHaveBeenCalled();
+
+      expect(transaction2.printStatementLine).toHaveBeenCalledWith();
     });
   });
 });

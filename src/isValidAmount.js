@@ -24,15 +24,19 @@ function isNumber(value) {
    * ? - decimal part is optional
    * $ - anchor to end
    */
-  return value.toString().match(/^[-]?\d+(\.\d+)?$/) !== null
-    && typeof value === 'number';
+  return (
+    value.toString().match(/^[-]?\d+(\.\d+)?$/) !== null
+    && typeof value === 'number'
+  );
 }
 
 function isValidAmount(amount) {
-  return (amount !== undefined)
-  && isNumber(amount)
-  && hasValidDecimals(amount)
-  && (amount > 0);
+  return (
+    amount !== undefined
+    && isNumber(amount)
+    && hasValidDecimals(amount)
+    && amount > 0
+  );
 }
 
 module.exports = isValidAmount;

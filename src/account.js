@@ -2,10 +2,12 @@ const StatementFunction = require('./statement.js');
 const DepositFunction = require('./deposit.js');
 const WithdrawlFunction = require('./withdrawl.js');
 
-function Account(transactionTypes = {
-  Deposit: DepositFunction,
-  Withdrawl: WithdrawlFunction,
-}) {
+function Account(
+  transactionTypes = {
+    Deposit: DepositFunction,
+    Withdrawl: WithdrawlFunction,
+  },
+) {
   const transactions = [];
   let balance = 0;
 

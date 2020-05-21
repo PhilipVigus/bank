@@ -6,7 +6,10 @@
         "jasmine": true
     },
     "extends": [
-        "airbnb-base"
+        "airbnb-base",
+        "airbnb",
+        "eslint:recommended",
+        "plugin:jasmine/recommended"
     ],
     "globals": {
         "Atomics": "readonly",

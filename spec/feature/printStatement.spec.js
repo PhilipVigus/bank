@@ -3,7 +3,10 @@ const Account = require('../../src/account.js');
 describe('user printing statements', () => {
   it('user can print their statement when it is empty', () => {
     const account = new Account();
-    expect(account.printStatement()).toEqual('date || credit || debit || balance');
+
+    expect(account.printStatement()).toEqual(
+      'date || credit || debit || balance',
+    );
   });
 
   it('prints a deposit', () => {
@@ -12,17 +15,19 @@ describe('user printing statements', () => {
 
     const account = new Account();
     account.deposit(100);
+
     expect(account.printStatement()).toEqual(expectedOutput);
   });
 
   it('prints a withdrawl', () => {
     const expectedOutput = 'date || credit || debit || balance\n'
-    + '19/05/2020 || || 100.00 || 0.00\n'
-    + '19/05/2020 || 100.00 || || 100.00';
+      + '19/05/2020 || || 100.00 || 0.00\n'
+      + '19/05/2020 || 100.00 || || 100.00';
 
     const account = new Account();
     account.deposit(100);
     account.withdraw(100);
+
     expect(account.printStatement()).toEqual(expectedOutput);
   });
 
@@ -36,6 +41,7 @@ describe('user printing statements', () => {
     account.deposit(100.33);
     account.deposit(2000.21);
     account.withdraw(100.45);
+
     expect(account.printStatement()).toEqual(expectedOutput);
   });
 });

@@ -26,7 +26,9 @@ function Withdrawl(withdrawlDetails, isValidAmount = isValidAmountFunction) {
   }
 
   this.printStatementLine = function printStatementLine() {
-    return `${dateToString(this.date)} || || ${this.amount.toFixed(2)} || ${this.balanceAfterWithdrawl.toFixed(2)}`;
+    return `${dateToString(this.date)} || || ${this.amount.toFixed(
+      2,
+    )} || ${this.balanceAfterWithdrawl.toFixed(2)}`;
   };
 
   validateWithdrawl();

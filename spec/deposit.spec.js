@@ -6,17 +6,27 @@ describe('Deposit', () => {
 
   describe('valid deposits', () => {
     it('allows you to deposit a valid amount', () => {
-      function isValidAmount() { return true; }
+      function isValidAmount() {
+        return true;
+      }
       const details = { date, amount: 3000, balance: 0 };
-      expect(() => { deposit = new Deposit(details, isValidAmount); }).not.toThrow();
+
+      expect(() => {
+        deposit = new Deposit(details, isValidAmount);
+      }).not.toThrow();
     });
   });
 
   describe('invalid deposits', () => {
     it('refuses a deposit when the amount is invalid', () => {
-      function isValidAmount() { return false; }
+      function isValidAmount() {
+        return false;
+      }
       const details = { date, amount: 0, balance: 0 };
-      expect(() => { deposit = new Deposit(details, isValidAmount); }).toThrow(new Error('Unable to make deposit - amount is invalid'));
+
+      expect(() => {
+        deposit = new Deposit(details, isValidAmount);
+      }).toThrow(new Error('Unable to make deposit - amount is invalid'));
     });
   });
 
@@ -40,12 +50,18 @@ describe('Deposit', () => {
 
     it('prints the line for the deposit', () => {
       deposit = new Deposit({ date, amount: 3000, balance: 0 });
-      expect(deposit.printStatementLine()).toEqual(`${dateString} || 3000.00 || || 3000.00`);
+
+      expect(deposit.printStatementLine()).toEqual(
+        `${dateString} || 3000.00 || || 3000.00`,
+      );
     });
 
     it('prints the line for a decimal deposit', () => {
       deposit = new Deposit({ date, amount: 3000.12, balance: 0 });
-      expect(deposit.printStatementLine()).toEqual(`${dateString} || 3000.12 || || 3000.12`);
+
+      expect(deposit.printStatementLine()).toEqual(
+        `${dateString} || 3000.12 || || 3000.12`,
+      );
     });
   });
 });

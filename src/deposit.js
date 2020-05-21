@@ -19,7 +19,9 @@ function Deposit(depositDetails, isValidAmount = isValidAmountFunction) {
   }
 
   this.printStatementLine = function printStatementLine() {
-    return `${dateToString(this.date)} || ${this.amount.toFixed(2)} || || ${this.balanceAfterDeposit.toFixed(2)}`;
+    return `${dateToString(this.date)} || ${this.amount.toFixed(
+      2,
+    )} || || ${this.balanceAfterDeposit.toFixed(2)}`;
   };
 
   validateDeposit();

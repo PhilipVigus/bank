@@ -13,7 +13,8 @@ describe('Account', () => {
 
       const account = new Account({ Deposit: {}, Withdrawl: {} });
       account.printStatement(StatementMockFunction);
-      expect(statementMockInstance.print).toHaveBeenCalled();
+
+      expect(statementMockInstance.print).toHaveBeenCalledWith();
     });
   });
 
@@ -29,6 +30,7 @@ describe('Account', () => {
       };
 
       const account = new Account(transactionTypes);
+
       expect(account.deposit(100)).toEqual('100.00 successfully deposited');
     });
   });
@@ -45,6 +47,7 @@ describe('Account', () => {
       };
 
       const account = new Account(transactionTypes);
+
       expect(account.withdraw(100)).toEqual('100.00 successfully withdrawn');
     });
   });
