@@ -1,11 +1,11 @@
 import isValidAmount from './isValidAmount';
 
 export default class Transaction {
-  constructor(details, type) {
+  constructor(date, amount, type) {
     this.type = type;
-    this.date = details.date;
-    this.amount = details.amount;
-    this.validateTransaction(details.amount);
+    this.date = date;
+    this.amount = amount;
+    this.validateTransaction(this.amount);
   }
 
   validateTransaction(amount) {

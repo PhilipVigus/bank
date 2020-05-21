@@ -6,19 +6,16 @@ export default function Account() {
   let balance = 0;
 
   function addDeposit(amount) {
-    const details = { date: new Date(), amount, balance };
     // throws error if deposit is invalid
-    // const deposit = new transactionTypes.Deposit(details);
-    const deposit = new Transaction(details, 'deposit');
+    const deposit = new Transaction(new Date(), amount, 'deposit');
     balance += amount;
     transactions.push(deposit);
     return `${amount.toFixed(2)} successfully deposited`;
   }
 
   function addWithdrawal(amount) {
-    const details = { date: new Date(), amount, balance };
     // throws error if withdrawal is invalid
-    const withdrawal = new Transaction(details, 'withdrawal');
+    const withdrawal = new Transaction(new Date(), amount, 'withdrawal');
     balance -= amount;
     transactions.push(withdrawal);
     return `${amount.toFixed(2)} successfully withdrawn`;
