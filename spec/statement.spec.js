@@ -32,7 +32,7 @@ describe('Statement', () => {
       };
 
       const transaction2 = {
-        type: 'withdrawl',
+        type: 'withdrawal',
         amount: 1000,
         balanceAfterDeposit: 1000,
         date,
@@ -57,7 +57,7 @@ describe('Statement', () => {
       };
 
       const transaction2 = {
-        type: 'withdrawl',
+        type: 'withdrawal',
         amount: 1000,
         balanceAfterDeposit: 1000,
         date,

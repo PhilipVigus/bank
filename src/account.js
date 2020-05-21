@@ -1,11 +1,11 @@
 const StatementFunction = require('./statement.js');
 const DepositFunction = require('./deposit.js');
-const WithdrawlFunction = require('./withdrawl.js');
+const withdrawalFunction = require('./withdrawal.js');
 
 function Account(
   transactionTypes = {
     Deposit: DepositFunction,
-    Withdrawl: WithdrawlFunction,
+    withdrawal: withdrawalFunction,
   }
 ) {
   const transactions = [];
@@ -20,12 +20,12 @@ function Account(
     return `${amount.toFixed(2)} successfully deposited`;
   }
 
-  function addWithdrawl(amount) {
+  function addwithdrawal(amount) {
     const details = { date: new Date(), amount, balance };
-    // throws error if withdrawl is invalid
-    const withdrawl = new transactionTypes.Withdrawl(details);
+    // throws error if withdrawal is invalid
+    const withdrawal = new transactionTypes.withdrawal(details);
     balance -= amount;
-    transactions.push(withdrawl);
+    transactions.push(withdrawal);
     return `${amount.toFixed(2)} successfully withdrawn`;
   }
 
@@ -39,7 +39,7 @@ function Account(
 
   this.withdraw = function withdraw(amount) {
     try {
-      return addWithdrawl(amount);
+      return addwithdrawal(amount);
     } catch (error) {
       return error.message;
     }

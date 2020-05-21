@@ -6,12 +6,14 @@ This repository contains my attempt that the Makers Academy individual technical
 ## Specification
 
 Requirements
+
 - You should be able to interact with your code via a REPL like IRB or the JavaScript console. (You don't need to implement a command line interface that takes input from STDIN.)
 - Deposits, withdrawal.
 - Account statement (date, amount, balance) printing.
 - Data can be kept in memory (it doesn't need to be stored to a database or anything).
 
 Acceptance criteria
+
 - Given a client makes a deposit of 1000 on 10-01-2012
 - And a deposit of 2000 on 13-01-2012
 - And a withdrawal of 500 on 14-01-2012
@@ -24,14 +26,15 @@ date || credit || debit || balance
 13/01/2012 || 2000.00 || || 3000.00
 10/01/2012 || 1000.00 || || 1000.00
 ```
+
 ## Approach
 
-| Purpose  	| Technology       	|
-|----------	|------------------	|
-| Language 	| Javascript(node) 	|
-| Testing  	| Jasmine          	|
-| Linting    | ESLint            |
-| Code Coverage	| nyc					|
+| Purpose       | Technology       |
+| ------------- | ---------------- |
+| Language      | Javascript(node) |
+| Testing       | Jasmine          |
+| Linting       | ESLint           |
+| Code Coverage | nyc              |
 
 ### Getting started
 
@@ -96,8 +99,8 @@ undefined
   '19/05/2020 || || 50.00 || 50.00\n' +
   '19/05/2020 || 100.00 || || 100.00'
 > account.withdraw();
-'Unable to make withdrawl - amount is not specified'
-> 
+'Unable to make withdrawal - amount is not specified'
+>
 ```
 
 ### User stories
@@ -135,7 +138,7 @@ So that I know when a transaction was invalid
 I want to get meaningful error messages
 Criteria
 - amounts must be positive numbers with a maximum of 2 decimals places
-- withdrawls fail if there are insufficient funds in the account
+- withdrawals fail if there are insufficient funds in the account
 ```
 
 ### Implementation process and challenges
@@ -143,10 +146,11 @@ Criteria
 My initial steps were too rushed, and although I was following TDD, it meant that I made unnecessary mistakes. Once I slowed down, progress was far smoother.
 
 #### Structure
+
 [![](https://mermaid.ink/img/eyJjb2RlIjoiY2xhc3NEaWFncmFtXG5cdEFjY291bnQgPHwtLSBEZXBvc2l0XG5cdEFjY291bnQgPHwtLSBXaXRoZHJhd2xcblx0RGVwb3NpdCA8fC0tIGlzVmFsaWRBbW91bnRcblx0V2l0aGRyYXdsIDx8LS0gaXNWYWxpZEFtb3VudFxuXHRBY2NvdW50IDx8LS0gU3RhdGVtZW50XG5cdGNsYXNzIEFjY291bnR7XG5cdFx0K3dpdGhkcmF3KGFtb3VudClcblx0XHQrZGVwb3NpdChhbW91bnQpXG5cdFx0K3ByaW50U3RhdGVtZW50KClcblx0XHQtYWRkV2l0aGRyYXdsKClcblx0XHQtYWRkRGVwb3NpdCgpXG5cdFx0LXRyYW5zYWN0aW9uc1tdXG5cdFx0LWludCBiYWxhbmNlXG5cdH1cblxuXHRjbGFzcyBEZXBvc2l0e1xuXHRcdC12YWxpZGF0ZUFtb3VudChhbW91bnQpXG5cdFx0LXZhbGlkYXRlRGVwb3NpdChhbW91bnQpXG5cdFx0LWRhdGVUb1N0cmluZyhkYXRlKVxuXHRcdCtwcmludFN0YXRlbWVudExpbmUoKVxuXHRcdCtzdHJpbmcgdHlwZVxuXHRcdCtkYXRlIGRhdGVcblx0XHQrZmxvYXQgYW1vdW50XG5cdFx0K2Zsb2F0IGJhbGFuY2VBZnRlckRlcG9zaXRcblx0fVxuXHRjbGFzcyBpc1ZhbGlkQW1vdW50e1xuXHRcdCtpc1ZhbGlkQW1vdW50KClcblx0XHQtaXNOdW1iZXIoKVxuXHRcdC1oYXNWYWxpZERlY2ltYWxzKClcblx0XHQtZ2V0RGVjaW1hbHMoKVxuXHR9XG5cdGNsYXNzIFN0YXRlbWVudHtcblx0XHQtc3RyaW5nIFNUQVRFTUVOVF9IRUFERVJcblx0XHQtdHJhbnNhY3Rpb25zXG5cdFx0LWFjY291bnRBY3Rpb25zVG9TdGF0ZW1lbnRTdHJpbmcoKVxuXHRcdCtwcmludCgpXG5cdH1cblx0Y2xhc3MgV2l0aGRyYXdse1xuXHQgICAgLXZhbGlkYXRlQXZhaWxhYmxlRnVuZHMoKVxuXHRcdC12YWxpZGF0ZUFtb3VudCgpXG5cdFx0LXZhbGlkYXRlV2l0aGRyYXdsKClcblx0XHQtZGF0ZVRvU3RyaW5nKClcblx0XHQrcHJpbnRTdGF0ZW1lbnRMaW5lKClcblx0XHQrc3RyaW5nIHR5cGVcblx0XHQrZGF0ZSBkYXRlXG5cdFx0K2Zsb2F0IGFtb3VudFxuXHRcdCtmbG9hdCBiYWxhbmNlQWZ0ZXJXaXRoZHJhd2xcblx0fSIsIm1lcm1haWQiOnsidGhlbWUiOiJkZWZhdWx0In0sInVwZGF0ZUVkaXRvciI6ZmFsc2V9)](https://mermaid-js.github.io/mermaid-live-editor/#/edit/eyJjb2RlIjoiY2xhc3NEaWFncmFtXG5cdEFjY291bnQgPHwtLSBEZXBvc2l0XG5cdEFjY291bnQgPHwtLSBXaXRoZHJhd2xcblx0RGVwb3NpdCA8fC0tIGlzVmFsaWRBbW91bnRcblx0V2l0aGRyYXdsIDx8LS0gaXNWYWxpZEFtb3VudFxuXHRBY2NvdW50IDx8LS0gU3RhdGVtZW50XG5cdGNsYXNzIEFjY291bnR7XG5cdFx0K3dpdGhkcmF3KGFtb3VudClcblx0XHQrZGVwb3NpdChhbW91bnQpXG5cdFx0K3ByaW50U3RhdGVtZW50KClcblx0XHQtYWRkV2l0aGRyYXdsKClcblx0XHQtYWRkRGVwb3NpdCgpXG5cdFx0LXRyYW5zYWN0aW9uc1tdXG5cdFx0LWludCBiYWxhbmNlXG5cdH1cblxuXHRjbGFzcyBEZXBvc2l0e1xuXHRcdC12YWxpZGF0ZUFtb3VudChhbW91bnQpXG5cdFx0LXZhbGlkYXRlRGVwb3NpdChhbW91bnQpXG5cdFx0LWRhdGVUb1N0cmluZyhkYXRlKVxuXHRcdCtwcmludFN0YXRlbWVudExpbmUoKVxuXHRcdCtzdHJpbmcgdHlwZVxuXHRcdCtkYXRlIGRhdGVcblx0XHQrZmxvYXQgYW1vdW50XG5cdFx0K2Zsb2F0IGJhbGFuY2VBZnRlckRlcG9zaXRcblx0fVxuXHRjbGFzcyBpc1ZhbGlkQW1vdW50e1xuXHRcdCtpc1ZhbGlkQW1vdW50KClcblx0XHQtaXNOdW1iZXIoKVxuXHRcdC1oYXNWYWxpZERlY2ltYWxzKClcblx0XHQtZ2V0RGVjaW1hbHMoKVxuXHR9XG5cdGNsYXNzIFN0YXRlbWVudHtcblx0XHQtc3RyaW5nIFNUQVRFTUVOVF9IRUFERVJcblx0XHQtdHJhbnNhY3Rpb25zXG5cdFx0LWFjY291bnRBY3Rpb25zVG9TdGF0ZW1lbnRTdHJpbmcoKVxuXHRcdCtwcmludCgpXG5cdH1cblx0Y2xhc3MgV2l0aGRyYXdse1xuXHQgICAgLXZhbGlkYXRlQXZhaWxhYmxlRnVuZHMoKVxuXHRcdC12YWxpZGF0ZUFtb3VudCgpXG5cdFx0LXZhbGlkYXRlV2l0aGRyYXdsKClcblx0XHQtZGF0ZVRvU3RyaW5nKClcblx0XHQrcHJpbnRTdGF0ZW1lbnRMaW5lKClcblx0XHQrc3RyaW5nIHR5cGVcblx0XHQrZGF0ZSBkYXRlXG5cdFx0K2Zsb2F0IGFtb3VudFxuXHRcdCtmbG9hdCBiYWxhbmNlQWZ0ZXJXaXRoZHJhd2xcblx0fSIsIm1lcm1haWQiOnsidGhlbWUiOiJkZWZhdWx0In0sInVwZGF0ZUVkaXRvciI6ZmFsc2V9)
 
 - The code is separated into 4 classes, with 1 utility function
-- The two transaction types (withdrawl and deposit) are in their own functions, which would make it relatively straightforward to add additional types at a later date.
+- The two transaction types (withdrawal and deposit) are in their own functions, which would make it relatively straightforward to add additional types at a later date.
 - IsValidAmount is a utility function used in several places, so it made sense for that to be extracted into its own file to prevent code duplication.
 
 In the main, the implementation developed organically, with refactorings and general design decisions naturally coming out of the tests I was writing. However, there were a couple of issues that merit further discussion.
@@ -157,7 +161,6 @@ The first major refactoring split the Statement function away from Account. As I
 
 The second major refactoring involved creating Deposit and Withdraw functions. I initially resisted this, prefering to keep all display logic within the Statement function. However, on reflection it made sense to create the two types of transaction, with Statement calling them to get how they should be displayed on the statement. I'm pleased with how this worked out, and it greatly simplified the Statement code.
 
-
 #### Not using function prototypes
 
 This was something I thought long and hard about. Function prototypes are mostly useful in a scenario where you expect those functions to be used as part of prototypal inheritance. However, their use makes implementation of information hiding and privacy more complex, and code less readable.
@@ -166,7 +169,7 @@ I chose not to use them simply because I felt that the improved code readability
 
 #### Validation of user input
 
-It took a while to work out the best way of checking that deposit and withdrawl amounts are numbers. Javascript doesn't make this easy, and there are downsides to most of the standard approaches. Many of these have loopholes relating to implicit type coersion that meant I didn't feel they were appropriate to use.
+It took a while to work out the best way of checking that deposit and withdrawal amounts are numbers. Javascript doesn't make this easy, and there are downsides to most of the standard approaches. Many of these have loopholes relating to implicit type coersion that meant I didn't feel they were appropriate to use.
 
 Although using a regex feels clunky, I feel it is probably the most consistent and sound approach when used in conjunction with the other validation checks in place.
 

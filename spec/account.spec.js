@@ -11,7 +11,7 @@ describe('Account', () => {
         return statementMockInstance;
       };
 
-      const account = new Account({ Deposit: {}, Withdrawl: {} });
+      const account = new Account({ Deposit: {}, withdrawal: {} });
       account.printStatement(StatementMockFunction);
 
       expect(statementMockInstance.print).toHaveBeenCalledWith();
@@ -36,14 +36,14 @@ describe('Account', () => {
   });
 
   describe('.withdraw', () => {
-    it('creates a withdrawl', () => {
-      const WithdrawlMock = function WithdrawlMock() {
+    it('creates a withdrawal', () => {
+      const withdrawalMock = function withdrawalMock() {
         return {};
       };
 
       const transactionTypes = {
         Deposit: {},
-        Withdrawl: WithdrawlMock,
+        withdrawal: withdrawalMock,
       };
 
       const account = new Account(transactionTypes);
