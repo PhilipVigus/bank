@@ -1,4 +1,4 @@
-function Statement(statementTransactions = []) {
+export default function Statement(statementTransactions = []) {
   const STATEMENT_HEADER = 'date || credit || debit || balance';
   const transactions = statementTransactions;
 
@@ -17,5 +17,3 @@ function Statement(statementTransactions = []) {
     return `${STATEMENT_HEADER}\n${accountActionsToStatementString()}`;
   };
 }
-
-module.exports = Statement;

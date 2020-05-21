@@ -1,4 +1,4 @@
-const Deposit = require('../src/deposit.js');
+import Deposit from '../src/deposit';
 
 describe('Deposit', () => {
   const date = new Date('2020-5-6');

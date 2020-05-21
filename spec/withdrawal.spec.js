@@ -1,4 +1,4 @@
-const Withdrawal = require('../src/withdrawal.js');
+import Withdrawal from '../src/withdrawal';
 
 describe('withdrawal', () => {
   const date = new Date('2020-5-6');

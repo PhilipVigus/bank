@@ -1,4 +1,4 @@
-const Statement = require('../src/statement.js');
+import Statement from '../src/statement';
 
 describe('Statement', () => {
   const date = new Date();

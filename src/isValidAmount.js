@@ -30,7 +30,7 @@ function isNumber(value) {
   );
 }
 
-function isValidAmount(amount) {
+export default function isValidAmount(amount) {
   return (
     amount !== undefined &&
     isNumber(amount) &&
@@ -38,5 +38,3 @@ function isValidAmount(amount) {
     amount > 0
   );
 }
-
-module.exports = isValidAmount;

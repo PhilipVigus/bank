@@ -1,8 +1,8 @@
-const isValidAmountFunction = require('./isValidAmount.js');
+import isValidAmount from './isValidAmount';
 
-function Deposit(depositDetails, isValidAmount = isValidAmountFunction) {
+export default function Deposit(depositDetails, isValid = isValidAmount) {
   function validateAmount() {
-    if (!isValidAmount(depositDetails.amount)) {
+    if (!isValid(depositDetails.amount)) {
       throw new Error('Unable to make deposit - amount is invalid');
     }
   }
@@ -31,5 +31,3 @@ function Deposit(depositDetails, isValidAmount = isValidAmountFunction) {
   this.amount = depositDetails.amount;
   this.balanceAfterDeposit = depositDetails.balance + depositDetails.amount;
 }
-
-module.exports = Deposit;

@@ -1,4 +1,4 @@
-const Account = require('../src/account.js');
+import Account from '../src/account';
 
 describe('Account', () => {
   describe('.printStatement', () => {
@@ -43,7 +43,7 @@ describe('Account', () => {
 
       const transactionTypes = {
         Deposit: {},
-        withdrawal: withdrawalMock,
+        Withdrawal: withdrawalMock,
       };
 
       const account = new Account(transactionTypes);

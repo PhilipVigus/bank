@@ -1,6 +1,6 @@
-const isValidAmountFunction = require('./isValidAmount.js');
+import isValidAmount from './isValidAmount';
 
-function Withdrawal(withdrawalDetails, isValidAmount = isValidAmountFunction) {
+export default function Withdrawal(withdrawalDetails, isValid = isValidAmount) {
   function validateAvailableFunds() {
     if (withdrawalDetails.amount > withdrawalDetails.balance) {
       throw new Error('Unable to make withdrawal - insufficient funds');
@@ -8,12 +8,12 @@ function Withdrawal(withdrawalDetails, isValidAmount = isValidAmountFunction) {
   }
 
   function validateAmount() {
-    if (!isValidAmount(withdrawalDetails.amount)) {
+    if (!isValid(withdrawalDetails.amount)) {
       throw new Error('Unable to make withdrawal - amount is invalid');
     }
   }
 
-  function validatewithdrawal() {
+  function validateWithdrawal() {
     validateAmount();
     validateAvailableFunds();
   }
@@ -28,16 +28,14 @@ function Withdrawal(withdrawalDetails, isValidAmount = isValidAmountFunction) {
   this.printStatementLine = function printStatementLine() {
     return `${dateToString(this.date)} || || ${this.amount.toFixed(
       2
-    )} || ${this.balanceAfterwithdrawal.toFixed(2)}`;
+    )} || ${this.balanceAfterWithdrawal.toFixed(2)}`;
   };
 
-  validatewithdrawal();
+  validateWithdrawal();
 
   this.type = 'withdrawal';
   this.date = withdrawalDetails.date;
   this.amount = withdrawalDetails.amount;
-  this.balanceAfterwithdrawal =
+  this.balanceAfterWithdrawal =
     withdrawalDetails.balance - withdrawalDetails.amount;
 }
-
-module.exports = Withdrawal;

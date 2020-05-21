@@ -1,4 +1,4 @@
-const Account = require('../../src/account.js');
+import Account from '../../src/account';
 
 describe('Account feature tests', () => {
   let dateString;
