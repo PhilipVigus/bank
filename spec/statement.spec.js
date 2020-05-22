@@ -5,7 +5,12 @@ describe('Statement', () => {
 
   describe('.print', () => {
     it('prints a blank statement', () => {
-      const statement = new Statement();
+      const transactionList = {
+        hasTransactions() {
+          return false;
+        },
+      };
+      const statement = new Statement(transactionList);
 
       expect(statement.print()).toEqual('date || credit || debit || balance');
     });
@@ -13,9 +18,11 @@ describe('Statement', () => {
     it('prints a statement with transactions', () => {
       const deposit = { type: 'deposit', amount: 2000, date };
       const withdrawal = { type: 'withdrawal', amount: 1000, date };
-
-      const statement = new Statement([deposit, withdrawal]);
-      statement.print();
+      const transactions = [deposit, withdrawal];
+      transactions.hasTransactions = function hasTransactions() {
+        return true;
+      };
+      const statement = new Statement(transactions);
 
       expect(statement.print()).toEqual(
         'date || credit || debit || balance\n' +

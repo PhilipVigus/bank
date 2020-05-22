@@ -1,7 +1,7 @@
 export default class Statement {
-  constructor(accountTransactions = []) {
+  constructor(newTransactionList) {
     this.STATEMENT_HEADER = 'date || credit || debit || balance';
-    this.transactions = accountTransactions;
+    this.newTransactions = newTransactionList;
   }
 
   static dateToString(date) {
@@ -27,21 +27,22 @@ export default class Statement {
 
   transactionsToStatementString() {
     let runningBalance = 0;
-    const statementLines = this.transactions.map((transaction) => {
+    const lines = [];
+    this.newTransactions.forEach((transaction) => {
       if (transaction.type === 'deposit') {
         runningBalance += transaction.amount;
-        return Statement.getDepositLine(transaction, runningBalance);
+        lines.push(Statement.getDepositLine(transaction, runningBalance));
+      } else {
+        runningBalance -= transaction.amount;
+        lines.push(Statement.getWithdrawalLine(transaction, runningBalance));
       }
-
-      runningBalance -= transaction.amount;
-      return Statement.getWithdrawalLine(transaction, runningBalance);
     });
 
-    return statementLines.reverse().join('\n');
+    return lines.reverse().join('\n');
   }
 
   print() {
-    if (this.transactions.length === 0) {
+    if (!this.newTransactions.hasTransactions()) {
       return this.STATEMENT_HEADER;
     }
 

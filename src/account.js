@@ -1,9 +1,11 @@
 import Statement from './statement.js';
 import Transaction from './transaction.js';
+import TransactionList from './transactionList.js';
 
 export default class Account {
   constructor() {
     this.transactionList = [];
+    this.newTransactionList = new TransactionList();
     this.balance = 0;
   }
 
@@ -18,6 +20,7 @@ export default class Account {
       const deposit = new TransactionClass(new Date(), amount, 'deposit');
       this.balance += amount;
       this.transactionList.push(deposit);
+      this.newTransactionList.add(deposit);
       return `${amount.toFixed(2)} successfully deposited`;
     } catch (error) {
       return error.message;
@@ -30,6 +33,7 @@ export default class Account {
       const withdrawal = new TransactionClass(new Date(), amount, 'withdrawal');
       this.balance -= amount;
       this.transactionList.push(withdrawal);
+      this.newTransactionList.add(withdrawal);
       return `${amount.toFixed(2)} successfully withdrawn`;
     } catch (error) {
       return error.message;
@@ -37,7 +41,7 @@ export default class Account {
   }
 
   printStatement(StatementClass = Statement) {
-    const statement = new StatementClass(this.transactionList);
+    const statement = new StatementClass(this.newTransactionList);
     return statement.print();
   }
 }

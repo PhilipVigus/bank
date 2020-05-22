@@ -12,4 +12,8 @@ export default class TransactionList {
       fn(transaction);
     });
   }
+
+  hasTransactions() {
+    return this.transactions.length !== 0;
+  }
 }
