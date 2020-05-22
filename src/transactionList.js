@@ -13,7 +13,7 @@ export default class TransactionList {
     });
   }
 
-  hasTransactions() {
-    return this.transactions.length !== 0;
+  isEmpty() {
+    return this.transactions.length === 0;
   }
 }

@@ -42,7 +42,7 @@ export default class Statement {
   }
 
   print() {
-    if (!this.newTransactions.hasTransactions()) {
+    if (this.newTransactions.isEmpty()) {
       return this.STATEMENT_HEADER;
     }
 

@@ -40,4 +40,12 @@ describe('TransactionList', () => {
       expect(transactions).toEqual('200\n');
     });
   });
+
+  describe('isEmpty', () => {
+    it('returns true when the list is empty', () => {
+      const list = new TransactionList();
+
+      expect(list.isEmpty()).toEqual(true);
+    });
+  });
 });

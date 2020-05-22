@@ -6,8 +6,8 @@ describe('Statement', () => {
   describe('.print', () => {
     it('prints a blank statement', () => {
       const transactionList = {
-        hasTransactions() {
-          return false;
+        isEmpty() {
+          return true;
         },
       };
       const statement = new Statement(transactionList);
@@ -19,8 +19,8 @@ describe('Statement', () => {
       const deposit = { type: 'deposit', amount: 2000, date };
       const withdrawal = { type: 'withdrawal', amount: 1000, date };
       const transactions = [deposit, withdrawal];
-      transactions.hasTransactions = function hasTransactions() {
-        return true;
+      transactions.isEmpty = function hasTransactions() {
+        return false;
       };
       const statement = new Statement(transactions);
 
