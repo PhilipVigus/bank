@@ -18,13 +18,13 @@ describe('Transaction', () => {
   });
 
   describe('invalid transactions', () => {
-    it('prevents you from withdrawing a valid amount', () => {
+    it('prevents you from withdrawing an invalid amount', () => {
       expect(() => {
         new Transaction(date, -1, 'withdrawal');
       }).toThrow(new Error('Unable to make withdrawal - amount is invalid'));
     });
 
-    it('prevents you from deposit a invalid amount', () => {
+    it('prevents you from deposit an invalid amount', () => {
       expect(() => {
         new Transaction(date, '100', 'deposit');
       }).toThrow(new Error('Unable to make deposit - amount is invalid'));

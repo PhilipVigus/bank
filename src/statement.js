@@ -1,7 +1,7 @@
 export default class Statement {
-  constructor(newTransactionList) {
+  constructor(transactionList) {
     this.STATEMENT_HEADER = 'date || credit || debit || balance';
-    this.newTransactions = newTransactionList;
+    this.transactions = transactionList;
   }
 
   static dateToString(date) {
@@ -28,7 +28,7 @@ export default class Statement {
   transactionsToStatementString() {
     let runningBalance = 0;
     const lines = [];
-    this.newTransactions.forEach((transaction) => {
+    this.transactions.forEach((transaction) => {
       if (transaction.type === 'deposit') {
         runningBalance += transaction.amount;
         lines.push(Statement.getDepositLine(transaction, runningBalance));
@@ -42,7 +42,7 @@ export default class Statement {
   }
 
   print() {
-    if (this.newTransactions.isEmpty()) {
+    if (this.transactions.isEmpty()) {
       return this.STATEMENT_HEADER;
     }
 

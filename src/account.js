@@ -4,8 +4,7 @@ import TransactionList from './transactionList.js';
 
 export default class Account {
   constructor() {
-    this.transactionList = [];
-    this.newTransactionList = new TransactionList();
+    this.transactionList = new TransactionList();
     this.balance = 0;
   }
 
@@ -19,8 +18,7 @@ export default class Account {
     try {
       const deposit = new TransactionClass(new Date(), amount, 'deposit');
       this.balance += amount;
-      this.transactionList.push(deposit);
-      this.newTransactionList.add(deposit);
+      this.transactionList.add(deposit);
       return `${amount.toFixed(2)} successfully deposited`;
     } catch (error) {
       return error.message;
@@ -32,8 +30,7 @@ export default class Account {
       this.checkAvailableFunds(amount);
       const withdrawal = new TransactionClass(new Date(), amount, 'withdrawal');
       this.balance -= amount;
-      this.transactionList.push(withdrawal);
-      this.newTransactionList.add(withdrawal);
+      this.transactionList.add(withdrawal);
       return `${amount.toFixed(2)} successfully withdrawn`;
     } catch (error) {
       return error.message;
@@ -41,7 +38,7 @@ export default class Account {
   }
 
   printStatement(StatementClass = Statement) {
-    const statement = new StatementClass(this.newTransactionList);
+    const statement = new StatementClass(this.transactionList);
     return statement.print();
   }
 }
