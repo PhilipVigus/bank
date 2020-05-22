@@ -2,13 +2,17 @@
   "name": "bank",
   "type": "module",
   "version": "1.0.0",
-  "description": "",
+  "description": "Project created while completing the bank technical challenge at Makers Academy",
   "main": "index.js",
   "scripts": {
     "test": "jasmine",
     "coverage": "nyc npm run test"
   },
-  "author": "",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/PhilipVigus/bank-technical-challenge.git"
+  },
+  "author": "Phil Vigus",
   "license": "ISC",
   "dependencies": {
     "jasmine": "^3.5.0"
