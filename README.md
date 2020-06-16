@@ -1,6 +1,7 @@
 # Bank technical challenge
 
-![](./account-screenshot.png)
+![screenshot](./account-screenshot.png)
+
 This repository contains my attempt that the Makers Academy individual technical test that can be found [here](https://github.com/makersacademy/course/blob/master/individual_challenges/bank_tech_test.md)
 
 ## Specification
